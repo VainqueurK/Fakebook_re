@@ -1,63 +1,72 @@
 package com.example.fakebookone;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.ErrorCodes;
-import com.firebase.ui.auth.IdpResponse;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int RC_SIGN_IN = 123;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private TabItem tab1,tab2,tab3;
+    private PagerAdapter pagerAdapter;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public void onClickSignIn(View view) {
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build()
-        );
+        TabLayout tabLayout = findViewById(R.id.tabBar);
+        TabItem tab1 = findViewById(R.id.tab1);
+        TabItem tab2 = findViewById(R.id.tab2);
+        TabItem tab3 = findViewById(R.id.tab3);
+        final ViewPager viewPager = findViewById(R.id.viewPager);
 
-        startActivityForResult(
-                AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .build(), RC_SIGN_IN);
-    }
+        final PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pageAdapter);
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
 
-            if(requestCode == RESULT_OK) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                System.out.println("Sign in successful! \n" +
-                        "name = " + user.getDisplayName() + "\n" +
-                        "email = " + user.getEmail() + "\n" +
-                        "id = " + user.getUid());
-            }
-            else {
-                if(response == null){
-                    System.out.println("Sign in cancelled"); return;
+                if(tab.getPosition() == 0)
+                {
+                    pageAdapter.notifyDataSetChanged();
                 }
-                if(response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    System.out.println("No internet connection"); return;
+
+                else if(tab.getPosition() == 1)
+                {
+                    pageAdapter.notifyDataSetChanged();
                 }
+
+                else if(tab.getPosition() == 2)
+                {
+                    pageAdapter.notifyDataSetChanged();
+                }
+
             }
-        }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
 }
