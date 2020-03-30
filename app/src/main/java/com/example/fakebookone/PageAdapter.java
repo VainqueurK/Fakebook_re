@@ -22,7 +22,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return new chat();
             case 1:
-                return new tab2();
+                return new Home();
             case 2:
                 return new tab3();
             default:
