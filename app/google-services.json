@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "368640180939",
+    "firebase_url": "https://fakebookone-11dcd.firebaseio.com",
+    "project_id": "fakebookone-11dcd",
+    "storage_bucket": "fakebookone-11dcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368640180939:android:097fba6827743cd42c514e",
+        "android_client_info": {
+          "package_name": "com.example.fakebookone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368640180939-50qltf36s8q7sl0195ftlpk4j1u1t9rp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fakebookone",
+            "certificate_hash": "70a89caf6417cdfd6bdabd5872bcb9aa4120f02a"
+          }
+        },
+        {
+          "client_id": "368640180939-5ng0hvk6lis7peq02aonvtereuk0mhvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLJXamYFUDPbszGtsW-3pUQ2PZXf_p-eA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368640180939-5ng0hvk6lis7peq02aonvtereuk0mhvc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
