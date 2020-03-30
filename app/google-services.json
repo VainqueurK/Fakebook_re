@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "368640180939-tla0vi3se8nnhdfns77nspsqranuq596.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fakebookone",
+            "certificate_hash": "fabb69b06929e5ecb471fa6bdff5834903f0c147"
+          }
+        },
+        {
           "client_id": "368640180939-50qltf36s8q7sl0195ftlpk4j1u1t9rp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
