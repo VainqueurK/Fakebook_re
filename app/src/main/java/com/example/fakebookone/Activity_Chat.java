@@ -1,30 +1,43 @@
 package com.example.fakebookone;
 
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toolbar;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link chat#newInstance} factory method to
+ * Use the {@link Activity_Chat#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class chat extends Fragment {
+public class Activity_Chat extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private Toolbar chattoolbar;
+    private ImageButton sendMessageButton, sendImageFileButton;
+    private EditText sendUserMessage;
+    private RecyclerView userMessagesList;
+
+
+
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public chat() {
+    public Activity_Chat() {
         // Required empty public constructor
     }
 
@@ -34,16 +47,16 @@ public class chat extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment chat.
+     * @return A new instance of fragment Activity_Chat.
      */
     // TODO: Rename and change types and number of parameters
-    public static chat newInstance(String param1, String param2) {
-        chat fragment = new chat();
+    public static Activity_Chat newInstance(String param1, String param2) {
+        Activity_Chat fragment = new Activity_Chat();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
-        return fragment;
+        return fragment; // test
     }
 
     @Override
@@ -53,12 +66,16 @@ public class chat extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab1, container, false);
+        return inflater.inflate(R.layout.chat, container, false);
     }
 }
