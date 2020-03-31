@@ -3,7 +3,6 @@ package com.example.fakebookone;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabItem;
