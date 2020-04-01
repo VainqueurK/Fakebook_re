@@ -7,7 +7,6 @@
     tools:context=".Activity_Chat">
 
 
-
     <!--android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -47,7 +46,7 @@
             android:id="@+id/send_image_file_button"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            />
+            android:src="@drawable/icon_select_image" />
 
         <EditText
             android:id="@+id/input_message"
@@ -60,7 +59,7 @@
             android:id="@+id/send_message_button"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            />
+            android:src="gs://fakebook-663e5.appspot.com/icon_send.png" />
 
 
     </LinearLayout>

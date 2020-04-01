@@ -60,8 +60,6 @@
 
     </RelativeLayout>
 
-    <!--<include
-        android:id="@+id/toolbar"
-        layout="/toolbar" />-->
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
