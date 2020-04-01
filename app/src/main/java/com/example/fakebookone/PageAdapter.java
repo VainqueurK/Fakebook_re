@@ -23,7 +23,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return new Home();
             case 2:
-                return new tab3();
+                return new Profile();
             default:
                 return null;
         }
