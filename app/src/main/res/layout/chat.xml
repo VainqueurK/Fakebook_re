@@ -28,7 +28,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
-        android:background="@android:color/black" />
+        android:background="@android:color/background_light" />
 
     <LinearLayout
         android:id="@+id/chat_linear_layout"
