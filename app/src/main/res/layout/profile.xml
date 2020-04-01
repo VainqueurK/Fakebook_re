@@ -33,17 +33,17 @@
             </androidx.appcompat.widget.AppCompatImageView>
 
             <TextView
-            android:id="@+id/profile_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profileImage"
-            android:text="Profile Name"
-            android:textAlignment="center"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="21sp"
-            android:textStyle="bold"
+                android:id="@+id/profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profileImage"
+                android:text="Profile Name"
+                android:textAlignment="center"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="21sp"
+                android:textStyle="bold"
 
-            ></TextView>
+                ></TextView>
 
             <TextView
                 android:id="@+id/username_name"
@@ -52,7 +52,21 @@
                 android:layout_below="@id/profile_name"
                 android:text="username"
                 android:textAlignment="center"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+
+                ></TextView>
+
+            <TextView
+                android:id="@+id/user_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username_name"
+                android:layout_marginTop="7dp"
+                android:text="Hello, I am user of Fakebook."
+                android:textAlignment="center"
+                android:textColor="@android:color/tab_indicator_text"
                 android:textSize="17sp"
                 android:textStyle="bold"
 
