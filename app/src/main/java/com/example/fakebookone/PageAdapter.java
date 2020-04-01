@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
-
     private int numTabs;
 
     public PageAdapter(@NonNull FragmentManager fm, int numbTabs) {

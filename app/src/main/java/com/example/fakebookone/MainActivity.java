@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,20 +21,28 @@ public class MainActivity extends AppCompatActivity {
     private PagerAdapter pagerAdapter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser == null)
+        {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+
+        //toolbar.setTitle("test");
+
 
         TabLayout tabLayout = findViewById(R.id.tabBar);
         TabItem tab1 = findViewById(R.id.tab1);
         TabItem tab2 = findViewById(R.id.tab2);
         TabItem tab3 = findViewById(R.id.tab3);
-        Toolbar toolbar = findViewById(R.id.toolbar);
 
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
