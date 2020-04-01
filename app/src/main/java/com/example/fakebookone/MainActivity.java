@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         TabItem tab1 = findViewById(R.id.tab1);
         TabItem tab2 = findViewById(R.id.tab2);
         TabItem tab3 = findViewById(R.id.tab3);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
         final PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
