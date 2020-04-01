@@ -59,7 +59,7 @@
             android:id="@+id/send_message_button"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_send" />
+            android:src="gs://fakebook-663e5.appspot.com/icon_send.png" />
 
 
     </LinearLayout>
