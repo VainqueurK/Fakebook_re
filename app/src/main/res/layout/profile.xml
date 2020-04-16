@@ -33,7 +33,7 @@
             </androidx.appcompat.widget.AppCompatImageView>
 
             <TextView
-                android:id="@+id/profile_name"
+                android:id="@+id/my_profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profileImage"
@@ -46,10 +46,10 @@
                 ></TextView>
 
             <TextView
-                android:id="@+id/username_name"
+                android:id="@+id/my_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_name"
+                android:layout_below="@id/my_profile_name"
                 android:text="username"
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_light"
@@ -59,10 +59,10 @@
                 ></TextView>
 
             <TextView
-                android:id="@+id/user_info"
+                android:id="@+id/my_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/username_name"
+                android:layout_below="@id/my_user_name"
                 android:layout_marginTop="7dp"
                 android:text="Hello, I am user of Fakebook."
                 android:textAlignment="center"
@@ -70,6 +70,58 @@
                 android:textSize="17sp"
                 android:textStyle="bold"
 
+                ></TextView>
+
+            <TextView
+                android:id="@+id/my_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_info"
+                android:layout_marginTop="20dp"
+                android:text="Date of Birth:"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/my_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_dob"
+                android:layout_marginTop="2dp"
+                android:text="Place of Work:"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/my_education"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_work"
+                android:layout_marginTop="2dp"
+                android:text="Education:"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/my_hometown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_education"
+                android:layout_marginTop="2dp"
+                android:text="Hometown:"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
                 ></TextView>
 
 
