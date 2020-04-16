@@ -19,7 +19,7 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0:
-                return new FragmentMessageUsers();
+                return new FragmentChat();
             case 1:
                 return new Home();
             case 2:

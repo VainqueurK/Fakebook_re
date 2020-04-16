@@ -29,7 +29,7 @@ public class MessageUser extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.home, container, false);
+        view = inflater.inflate(R.layout.message_user, container, false);
         return view;
        // InitializeFields();
     }

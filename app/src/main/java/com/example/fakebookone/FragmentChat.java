@@ -12,16 +12,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class FragmentMessageUsers extends Fragment {
+public class FragmentChat extends Fragment {
 
     View view;
-    private ImageButton SendMessageButton, SendImageFileButton;
-    private EditText SendUserMessage;
-    private RecyclerView UserMessagesList;
+    private EditText searchField;
+    private ImageButton searchBtn;
+    private RecyclerView resultList;
 
 
 
-    public FragmentMessageUsers()
+    public FragmentChat()
     {
 
     }
@@ -29,9 +29,17 @@ public class FragmentMessageUsers extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.home, container, false);
+        view = inflater.inflate(R.layout.chats, container, false);
+        InitializeFields();
         return view;
-        // InitializeFields();
     }
+
+    private void InitializeFields() {
+        searchField = (EditText) getView().findViewById(R.id.search_field);
+        searchBtn = (ImageButton) getView().findViewById(R.id.search_image);
+        resultList = (RecyclerView) getView().findViewById(R.id.chat_list);
+
+    }
+
 
 }
