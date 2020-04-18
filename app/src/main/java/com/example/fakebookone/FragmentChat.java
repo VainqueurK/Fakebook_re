@@ -30,14 +30,22 @@ public class FragmentChat extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.chats, container, false);
-        InitializeFields();
+        if((EditText) view.findViewById(R.id.search_field) != null) {
+            searchField = view.findViewById(R.id.search_field);
+            searchBtn = view.findViewById(R.id.search_image);
+            resultList = view.findViewById(R.id.chat_list);
+        }
+        //InitializeFields();
         return view;
     }
 
     private void InitializeFields() {
-        searchField = (EditText) getView().findViewById(R.id.search_field);
-        searchBtn = (ImageButton) getView().findViewById(R.id.search_image);
-        resultList = (RecyclerView) getView().findViewById(R.id.chat_list);
+
+        if((EditText) view.findViewById(R.id.search_field) != null) {
+            searchField = view.findViewById(R.id.search_field);
+            searchBtn = view.findViewById(R.id.search_image);
+            resultList = view.findViewById(R.id.chat_list);
+        }
 
     }
 
