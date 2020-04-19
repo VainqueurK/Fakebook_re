@@ -14,20 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class FragmentChat extends Fragment {
 
-    View view;
+    private View view;
     private EditText searchField;
     private ImageButton searchBtn;
     private RecyclerView resultList;
 
 
 
-    public FragmentChat()
-    {
+    public FragmentChat() {
 
     }
 
+
+
+    public void onCreate(){};
     @Nullable
-    @Override
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.chats, container, false);
         InitializeFields();
@@ -35,9 +37,17 @@ public class FragmentChat extends Fragment {
     }
 
     private void InitializeFields() {
-        searchField = (EditText) getView().findViewById(R.id.search_field);
-        searchBtn = (ImageButton) getView().findViewById(R.id.search_image);
-        resultList = (RecyclerView) getView().findViewById(R.id.chat_list);
+        if(view.findViewById(R.id.search_field) != null) {
+            searchField = view.findViewById(R.id.search_field);
+        }
+
+        if(view.findViewById(R.id.search_image) != null) {
+            searchBtn = view.findViewById(R.id.search_image);
+        }
+        if(view.findViewById(R.id.chat_list) != null) {
+            resultList =  view.findViewById(R.id.chat_list);
+        }
+
 
     }
 

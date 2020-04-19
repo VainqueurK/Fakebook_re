@@ -26,12 +26,13 @@ public class MessageUser extends Fragment {
 
     }
 
+    public void onCreate(){};
     @Nullable
-    @Override
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.message_user, container, false);
-        return view;
-       // InitializeFields();
+        InitializeFields();
+        return view = inflater.inflate(R.layout.message_user, container, false);
+
     }
 
     private void InitializeFields() {
