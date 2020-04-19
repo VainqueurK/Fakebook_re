@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,6 +43,7 @@ public class FragmentChat extends Fragment {
     private DatabaseReference mfakebookDataBase; //referencing the database
     ArrayList<ChatSearchResults> list;
     private FirebaseRecyclerAdapter ChatSearchAdapter;
+    private Button chat;
 
     public FragmentChat() {
 
@@ -53,7 +55,6 @@ public class FragmentChat extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.chats, container, false);
-
         InitializeFields();
 
         return view;
@@ -67,7 +68,7 @@ public class FragmentChat extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists())
                     {
-                            list = new ArrayList<>();
+                        list = new ArrayList<>();
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
                             list.add(ds.getValue(ChatSearchResults.class));
                         }
@@ -88,7 +89,7 @@ public class FragmentChat extends Fragment {
 
                 @Override
                 public boolean onQueryTextSubmit(String s) {
-                    return false;
+                    return true;
                 }
 
                 @Override
@@ -103,7 +104,7 @@ public class FragmentChat extends Fragment {
     public void search(String str) {
         ArrayList<ChatSearchResults> myList = new ArrayList<ChatSearchResults>();
         for(ChatSearchResults object : list){
-            if(object.getBio().toLowerCase().contains(str.toLowerCase())){
+            if(object.getUsername().toLowerCase().contains(str.toLowerCase())){
                 myList.add(object);
             }
         }
@@ -125,7 +126,9 @@ public class FragmentChat extends Fragment {
         }
         //initialize database reference
         mfakebookDataBase = FirebaseDatabase.getInstance().getReference("Users");
-
+        if (view.findViewById(R.id.chat_with_user) != null) {
+            chat = view.findViewById(R.id.chat_with_user);
+        }
 
     }
 }

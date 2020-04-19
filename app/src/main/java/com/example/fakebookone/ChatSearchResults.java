@@ -1,13 +1,17 @@
 package com.example.fakebookone;
 
+import android.widget.Button;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ChatSearchResults  {
     public String username, bio;
+    public Button chat;
     public ChatSearchResults(){}
-    public ChatSearchResults(String username, String bio) {
+    public ChatSearchResults(String username, String bio, Button chat) {
         this.username = username;
         this.bio = bio;
+        this.chat = chat;
     }
 
     public String getUsername() {
