@@ -1,7 +1,10 @@
 package com.example.fakebookone;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -10,6 +13,20 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 
 /**
@@ -24,6 +41,11 @@ public class Profile extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     View view;
+    private DatabaseReference profileRef;
+    private FirebaseAuth mAuth;
+    private String currentUserId;
+
+
     private TextView userProfileName, username, userInfo, userDob, userWork, userEducation, userHometown;
     private ImageView userProfileImage;
 
@@ -67,7 +89,22 @@ public class Profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.profile, container, false);
+
+
+
+
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.profile, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+        //                                                                               specific unique id of user
+        profileRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+
 
         userProfileName = view.findViewById(R.id.my_profile_name);
         username = view.findViewById(R.id.my_user_name);
@@ -78,7 +115,73 @@ public class Profile extends Fragment {
         userHometown = view.findViewById(R.id.my_education);
 
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.profile, container, false);
+
+        profileRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    String usernameDB =  dataSnapshot.child("username").getValue().toString();
+                   // String fullNameDB =  dataSnapshot.child("fullName").getValue().toString();
+
+                    username.setText("@" + usernameDB);
+                    userProfileName.setText(usernameDB);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
+
+
+/*
+    private void editProfileDetails(final String username, String password, String email){
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    String userId = firebaseUser.getUid();
+
+                    profileRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("id", userId);
+                    hashMap.put("username", username);
+                    hashMap.put("bio", "");
+                    hashMap.put("imageurl", "gs://fakebookone-11dcd.appspot.com/profilepic.png");//james you need to modify this hashmap to includ extra information for later
+
+                    profileRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
+                            {
+                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+
+
+                }
+                else {
+                    Toast.makeText(RegisterActivity.this , "You can't register with those credentials", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+
+    }
+ */
+
+
 }
