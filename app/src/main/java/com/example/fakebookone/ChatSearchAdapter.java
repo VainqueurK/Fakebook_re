@@ -38,13 +38,13 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.nameText.setText(list.get(position).getUsername());
         holder.bioText.setText(list.get(position).getBio());
-        holder.chatButton.setOnClickListener(new View.OnClickListener(){
+        /*holder.chatButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View V){
                 Intent activityMessageIntent = new Intent(V.getContext(),
                 MessageUser.class);
                 V.getContext().startActivity(activityMessageIntent);
             }
-        });
+        });*/
     }
 
     @Override
