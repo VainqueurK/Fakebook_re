@@ -41,7 +41,7 @@ public class FragmentChat extends Fragment {
     private RecyclerView resultList;
     private DatabaseReference mfakebookDataBase; //referencing the database
     ArrayList<ChatSearchResults> list;
-    private Adapter ChatSearchAdapter;
+    private FirebaseRecyclerAdapter ChatSearchAdapter;
 
     public FragmentChat() {
 
