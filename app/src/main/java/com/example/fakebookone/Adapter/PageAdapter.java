@@ -1,9 +1,13 @@
-package com.example.fakebookone;
+package com.example.fakebookone.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.fakebookone.Fragment.FragmentChat;
+import com.example.fakebookone.Home;
+import com.example.fakebookone.Misc.Profile;
 
 public class PageAdapter extends FragmentPagerAdapter {
 

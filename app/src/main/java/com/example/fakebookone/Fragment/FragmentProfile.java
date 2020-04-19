@@ -1,4 +1,4 @@
-package com.example.fakebookone;
+package com.example.fakebookone.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class FragmentHome extends Fragment {
+import com.example.fakebookone.R;
+
+public class FragmentProfile extends Fragment {
 
     View v;
 
-    public FragmentHome()
+    public FragmentProfile()
     {
 
     }

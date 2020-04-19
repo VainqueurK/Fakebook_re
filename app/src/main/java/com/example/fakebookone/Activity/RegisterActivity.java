@@ -1,4 +1,4 @@
-package com.example.fakebookone;
+package com.example.fakebookone.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -77,12 +78,16 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     private void register(final String username, String password, String email){
+        System.out.println("yo it works");
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
+                System.out.println("completed");
                 if(task.isSuccessful())
                 {
+                    System.out.println("task works");
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     String userId = firebaseUser.getUid();
 
@@ -114,7 +119,12 @@ public class RegisterActivity extends AppCompatActivity {
 
 
             }
+        }).addOnFailureListener((e)->{
+
+            Toast.makeText(RegisterActivity.this , e.getMessage(), Toast.LENGTH_SHORT).show();
+
         });
+
 
 
     }

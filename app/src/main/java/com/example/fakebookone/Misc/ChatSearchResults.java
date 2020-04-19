@@ -1,4 +1,4 @@
-package com.example.fakebookone;
+package com.example.fakebookone.Misc;
 
 import android.widget.Button;
 

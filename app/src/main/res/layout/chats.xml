@@ -5,48 +5,64 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentChat">>
+    tools:context=".Fragment.FragmentChat">>
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
-
-    <SearchView
-        android:id="@+id/search_field"
-        android:layout_width="391dp"
+    <Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="0dp"
-        android:backgroundTint="#00FFFFFF"
-        android:visibility="visible"
-        app:queryHint="Search"
-        android:background="@drawable/search_outline"
-        app:srcCompat="@android:drawable/ic_search_category_default"
-        android:queryHint="Search for a chat..."
-        app:defaultQueryHint="hint"
-        android:iconifiedByDefault="false"
-        app:iconifiedByDefault="false"/>
+        android:background="@color/colorPrimary"
+        android:elevation="4dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chat_list"
-        android:layout_width="400dp"
-        android:layout_height="529dp"
-        android:layout_below="@+id/search_field"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="125dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="77dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/leavesearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:backgroundTint="#000000"
+                    android:foregroundTint="#000000"
+                    android:paddingRight="50px"
+                    android:tint="#000000"
+                    app:srcCompat="@drawable/ic_action_name" />
+
+                <EditText
+                    android:id="@+id/search_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    android:ems="10"
+                    android:hint="Search Users"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginEnd="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </FrameLayout>
 
 </RelativeLayout>

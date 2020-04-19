@@ -1,18 +1,13 @@
-package com.example.fakebookone;
+package com.example.fakebookone.Fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.TextClock;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -21,29 +16,26 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.firebase.ui.auth.AuthUI;
+import com.example.fakebookone.Adapter.ChatSearchAdapter;
+import com.example.fakebookone.Misc.ChatSearchResults;
+import com.example.fakebookone.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class FragmentChat extends Fragment {
 
     private View view;
-    private SearchView searchField;
+    private EditText searchField;
     private RecyclerView resultList;
     private DatabaseReference mfakebookDataBase; //referencing the database
     ArrayList<ChatSearchResults> list;
     private FirebaseRecyclerAdapter ChatSearchAdapter;
-    private Button chat;
 
     public FragmentChat() {
 
@@ -55,6 +47,7 @@ public class FragmentChat extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.chats, container, false);
+
         InitializeFields();
 
         return view;
@@ -68,11 +61,11 @@ public class FragmentChat extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists())
                     {
-                        list = new ArrayList<>();
+                            list = new ArrayList<>();
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
                             list.add(ds.getValue(ChatSearchResults.class));
                         }
-                        ChatSearchAdapter adapterClass = new ChatSearchAdapter(list);
+                        com.example.fakebookone.Adapter.ChatSearchAdapter adapterClass = new ChatSearchAdapter(list);
                         resultList.setAdapter((RecyclerView.Adapter) ChatSearchAdapter);
 
                     }
@@ -85,17 +78,20 @@ public class FragmentChat extends Fragment {
             });
         }
         if(searchField != null){
-            searchField.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-
+            searchField.addTextChangedListener(new TextWatcher() {
                 @Override
-                public boolean onQueryTextSubmit(String s) {
-                    return true;
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
                 }
 
                 @Override
-                public boolean onQueryTextChange(String s) {
-                    search(s);
-                    return true;
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    search(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
                 }
             });
         }
@@ -104,7 +100,7 @@ public class FragmentChat extends Fragment {
     public void search(String str) {
         ArrayList<ChatSearchResults> myList = new ArrayList<ChatSearchResults>();
         for(ChatSearchResults object : list){
-            if(object.getUsername().toLowerCase().contains(str.toLowerCase())){
+            if(object.getBio().toLowerCase().contains(str.toLowerCase())){
                 myList.add(object);
             }
         }
@@ -126,9 +122,7 @@ public class FragmentChat extends Fragment {
         }
         //initialize database reference
         mfakebookDataBase = FirebaseDatabase.getInstance().getReference("Users");
-        if (view.findViewById(R.id.chat_with_user) != null) {
-            chat = view.findViewById(R.id.chat_with_user);
-        }
+
 
     }
 }

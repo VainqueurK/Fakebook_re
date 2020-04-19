@@ -1,4 +1,4 @@
-package com.example.fakebookone;
+package com.example.fakebookone.Misc;
 
 public class Post {
     private String publisher;
