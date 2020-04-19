@@ -5,9 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/profile_image"
+    <CardView>
+    <ImageView        android:id="@+id/profile_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_alignParentTop="true"
@@ -35,4 +34,5 @@
         android:layout_marginStart="125dp"
         android:layout_marginTop="130dp"
         android:text="Bio" />
+    </CardView>
 </RelativeLayout>
