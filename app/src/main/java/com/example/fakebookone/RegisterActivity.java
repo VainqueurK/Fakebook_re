@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                     hashMap.put("id", userId);
                     hashMap.put("username", username);
                     hashMap.put("bio", "");
-                    hashMap.put("imageurl", "gs://fakebookone-11dcd.appspot.com/profilepic.png");
+                    hashMap.put("imageurl", "gs://fakebookone-11dcd.appspot.com/profilepic.png");//james you need to modify this hashmap to includ extra information for later
 
                     reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
