@@ -1,7 +1,10 @@
 package com.example.fakebookone;
 
-public class ChatSearchResults {
+import androidx.recyclerview.widget.RecyclerView;
+
+public class ChatSearchResults  {
     public String username, bio;
+    public ChatSearchResults(){}
     public ChatSearchResults(String username, String bio) {
         this.username = username;
         this.bio = bio;
