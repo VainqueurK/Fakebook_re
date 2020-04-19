@@ -1,6 +1,7 @@
 package com.example.fakebookone;
 
 public class ChatSearchResults {
+    public String username, bio;
     public ChatSearchResults(String username, String bio) {
         this.username = username;
         this.bio = bio;
@@ -22,5 +23,5 @@ public class ChatSearchResults {
         this.bio = bio;
     }
 
-    public String username, bio;
+
 }
