@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".Misc.Profile">
+    tools:context=".Fragment.FragmentProfile">
 
     <include
         android:id="@+id/toolbar"
@@ -31,6 +31,17 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/profile"></androidx.appcompat.widget.AppCompatImageView>
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/profileImage"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:text="Logout"
+
+                android:textAlignment="center"
+                android:textSize="10sp"></Button>
 
             <TextView
                 android:id="@+id/my_profile_name"

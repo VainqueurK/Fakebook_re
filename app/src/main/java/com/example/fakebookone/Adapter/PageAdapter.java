@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.fakebookone.Fragment.FragmentChat;
 import com.example.fakebookone.Home;
-import com.example.fakebookone.Misc.Profile;
+import com.example.fakebookone.Fragment.FragmentProfile;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
@@ -27,7 +27,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return new Home();
             case 2:
-                return new Profile();
+                return new FragmentProfile();
             default:
                 return null;
         }

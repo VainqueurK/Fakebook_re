@@ -100,7 +100,7 @@ public class FragmentChat extends Fragment {
     public void search(String str) {
         ArrayList<ChatSearchResults> myList = new ArrayList<ChatSearchResults>();
         for(ChatSearchResults object : list){
-            if(object.getBio().toLowerCase().contains(str.toLowerCase())){
+            if(object.getUsername().toLowerCase().contains(str.toLowerCase())){
                 myList.add(object);
             }
         }
