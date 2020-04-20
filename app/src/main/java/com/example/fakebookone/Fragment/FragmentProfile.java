@@ -122,10 +122,12 @@ public class FragmentProfile extends Fragment {
                 if(dataSnapshot.exists())
                 {
                     String usernameDB =  dataSnapshot.child("username").getValue().toString();
-                   // String fullNameDB =  dataSnapshot.child("fullName").getValue().toString();
+                    String fullNameDB =  dataSnapshot.child("fullName").getValue().toString();
+                    String dobDB = dataSnapshot.child("dateOfBirth").getValue().toString();
 
-                    username.setText("@" + usernameDB);
-                    userProfileName.setText(usernameDB);
+                            username.setText("@" + usernameDB);
+                    userProfileName.setText(fullNameDB);
+                    userDob.setText("Date of Birth:\t" + dobDB);
                 }
             }
 

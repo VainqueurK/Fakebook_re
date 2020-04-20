@@ -2,16 +2,20 @@ package com.example.fakebookone.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fakebookone.Fragment.DatePickerFragment;
 import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,23 +25,29 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    EditText email, password, rpassword, username;
-    Button register;
+    EditText email, password, rpassword, username, fullName;
+    Button register, datePickerBtn;
     TextView login;
 
     FirebaseAuth auth;
     DatabaseReference reference;
+    String dateOfBirth = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
+
+
         email = findViewById(R.id.emailreg);
+        fullName =findViewById(R.id.fullNamereg);
         username = findViewById(R.id.usernamereg);
         password = findViewById(R.id.passwordreg);
         rpassword = findViewById(R.id.rpassword);
@@ -59,8 +69,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String strUsername = username.getText().toString();
                 String strPassword = password.getText().toString();
                 String strEmail = email.getText().toString();
+                String strFullName = fullName.getText().toString();
 
-                if(TextUtils.isEmpty(strUsername) || TextUtils.isEmpty(strPassword) || TextUtils.isEmpty(strEmail))
+                if(TextUtils.isEmpty(strUsername) || TextUtils.isEmpty(strPassword) || TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strFullName))
                 {
                     Toast.makeText(RegisterActivity.this , "Please fill all fields before moving on", Toast.LENGTH_SHORT).show();
                 }
@@ -70,14 +81,36 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    register(strUsername, strPassword, strEmail);
+                    register(strUsername, strPassword, strEmail,strFullName);
                 }
+            }
+        });
+
+        datePickerBtn = findViewById(R.id.datePickerBtn);
+        datePickerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });
 
 
     }
-    private void register(final String username, String password, String email){
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        dateOfBirth  = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+
+    }
+
+    private void register(final String username, String password, String email, String fullName){
         System.out.println("yo it works");
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
@@ -98,6 +131,8 @@ public class RegisterActivity extends AppCompatActivity {
                     hashMap.put("username", username);
                     hashMap.put("bio", "");
                     hashMap.put("imageurl", "gs://fakebookone-11dcd.appspot.com/profilepic.png");//james you need to modify this hashmap to includ extra information for later
+                    hashMap.put("fullName", fullName);
+                    hashMap.put("dateOfBirth", dateOfBirth);
 
                     reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -128,4 +163,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+
 }
