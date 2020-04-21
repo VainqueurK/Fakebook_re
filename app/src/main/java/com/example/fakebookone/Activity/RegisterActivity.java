@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity implements DatePickerDia
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-        dateOfBirth  = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        dateOfBirth  = DateFormat.getDateInstance().format(c.getTime());
 
 
     }
