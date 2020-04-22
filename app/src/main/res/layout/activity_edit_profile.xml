@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.FragmentProfile">
+    tools:context=".Activity.EditProfileActivity">
 
 
     <include
@@ -13,7 +13,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="537dp"
+        android:layout_height="650dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
@@ -23,26 +23,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/profileImage"
-                android:layout_width="195dp"
-                android:layout_height="172dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/profile" />
-
-            <Button
-                android:id="@+id/logout_button"
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_toRightOf="@id/profileImage"
-                android:text="Logout"
-
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Edit Profile"
                 android:textAlignment="center"
-                android:textSize="10sp" />
+                android:textColor="@android:color/black"
+
+                android:textSize="30sp"
+
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/profileImage"
+                android:layout_width="189dp"
+                android:layout_height="176dp"
+                android:layout_below="@id/title"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="51dp"
+                android:src="@drawable/profile" />
 
             <TextView
                 android:id="@+id/my_profile_name"
@@ -59,18 +62,7 @@
 
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/edit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/profileImage"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_toRightOf="@id/my_profile_name"
-                android:text="Edit Profile"
 
-                android:textAlignment="center"
-                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/my_user_name"
@@ -89,6 +81,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_user_name"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:text="Bio:"
                 android:textColor="@android:color/black"
@@ -97,29 +90,28 @@
                 />
 
 
-            <TextView
-                android:id="@+id/my_bio_info"
-                android:layout_width="382dp"
-                android:layout_height="73dp"
+            <EditText
+                android:id="@+id/my_bio_edit"
+                android:layout_width="398dp"
+                android:layout_height="100dp"
                 android:layout_below="@id/my_bio_title"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:inputType="textMultiLine"
                 android:text="Hello, I am user of Fakebook."
                 android:textColor="@android:color/tab_indicator_text"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:gravity="top|left"/>
+                android:gravity="top|left"
+                android:layout_margin="10dp"
+
+                />
 
             <TextView
                 android:id="@+id/my_dob"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/my_bio_info"
+                android:layout_below="@id/my_bio_edit"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:text="Date of Birth:"
@@ -129,33 +121,33 @@
 
 
             <TextView
-                android:id="@+id/my_dob_info"
+                android:id="@+id/my_dob_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/my_bio_info"
+                android:layout_below="@id/my_bio_edit"
                 android:layout_toRightOf="@id/my_dob"
                 android:text="info"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
-                />
+                 />
 
             <TextView
                 android:id="@+id/my_work"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_dob"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginLeft="5dp"
                 android:text="Place of Work:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/my_work_info"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/my_work_edit"
+                android:layout_width="252dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_dob"
                 android:layout_marginTop="2dp"
@@ -170,14 +162,14 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_work"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginLeft="5dp"
                 android:text="Education:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/my_education_info"
+            <EditText
+                android:id="@+id/my_education_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_work"
@@ -194,14 +186,14 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_education"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginLeft="5dp"
                 android:text="Hometown:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/my_hometown_info"
+            <EditText
+                android:id="@+id/my_hometown_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_education"
@@ -212,6 +204,18 @@
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 />
+            <Button
+                android:id="@+id/done_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_hometown_edit"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/my_profile_name"
+                android:text="Save Changes"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
 
         </RelativeLayout>
 

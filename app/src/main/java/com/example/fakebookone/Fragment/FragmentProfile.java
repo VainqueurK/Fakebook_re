@@ -1,13 +1,11 @@
 package com.example.fakebookone.Fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.fakebookone.Activity.EditProfileActivity;
 import com.example.fakebookone.Activity.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +35,7 @@ public class FragmentProfile extends Fragment {
     private String currentUserId;
 
 
-    private TextView userProfileName, username, userInfo, userDob, userWork, userEducation, userHometown;
+    private TextView txtFieldProfileName, txtFieldUsername, txtFieldBio, txtFieldDob, txtFieldWork, txtFieldEducation, txtFieldHometown;
     private ImageView userProfileImage;
     private Button logoutBtn, editBtn;
 
@@ -66,13 +65,13 @@ public class FragmentProfile extends Fragment {
         editBtn = view.findViewById(R.id.edit_button);
 
         // Text Fields
-        userProfileName = view.findViewById(R.id.my_profile_name);
-        username = view.findViewById(R.id.my_user_name);
-        userInfo = view.findViewById(R.id.my_info);
-        userDob = view.findViewById(R.id.my_dob);
-        userWork = view.findViewById(R.id.my_work);
-        userEducation = view.findViewById(R.id.my_education);
-        userHometown = view.findViewById(R.id.my_education);
+        txtFieldProfileName = view.findViewById(R.id.my_profile_name);
+        txtFieldUsername = view.findViewById(R.id.my_user_name);
+        txtFieldBio = view.findViewById(R.id.my_bio_info);
+        txtFieldDob = view.findViewById(R.id.my_dob_info);
+        txtFieldWork = view.findViewById(R.id.my_work_info);
+        txtFieldEducation = view.findViewById(R.id.my_education_info);
+        txtFieldHometown = view.findViewById(R.id.my_hometown_info);
 
 
         profileRef.addValueEventListener(new ValueEventListener() {
@@ -80,13 +79,28 @@ public class FragmentProfile extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
-                    String usernameDB =  dataSnapshot.child("username").getValue().toString();
-                    String fullNameDB =  dataSnapshot.child("fullName").getValue().toString();
-                    String dobDB = dataSnapshot.child("dateOfBirth").getValue().toString();
+                    String dBUsername =  dataSnapshot.child("username").getValue().toString();
+                    String dBFullName =  dataSnapshot.child("fullName").getValue().toString();
+                    String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
+                    String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
 
-                    username.setText("@" + usernameDB);
-                    userProfileName.setText(fullNameDB);
-                    userDob.setText("Date of Birth:\t" + dobDB);
+
+
+                    String dBBio = dataSnapshot.child("bio").getValue().toString();
+                    String dBWork = dataSnapshot.child("work").getValue().toString();
+                    String dBEducation = dataSnapshot.child("education").getValue().toString();
+                    String dBHometown = dataSnapshot.child("hometown").getValue().toString();
+
+                    // Setting Text Views to DB Values
+                    txtFieldUsername.setText("@" + dBUsername);
+                    txtFieldProfileName.setText(dBFullName);
+                    txtFieldDob.setText( dBDob);
+
+                    txtFieldBio.setText(dBBio);
+                    txtFieldWork.setText(dBWork);
+                    txtFieldEducation.setText(dBEducation);
+                    txtFieldHometown.setText(dBHometown);
+
                 }
             }
 
@@ -108,7 +122,8 @@ public class FragmentProfile extends Fragment {
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-              // Navigation.findNavController(v).navigate(R.id.action_fragmentProfile_to_fragmentEditProfile);
+              Intent nextScreen = new Intent(getActivity(), EditProfileActivity.class);
+              startActivity(nextScreen);
 
             }
         });
