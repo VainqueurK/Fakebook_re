@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.FragmentProfile">
 
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
@@ -23,27 +22,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="7dp"
+                android:text="My Profile"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profileImage"
-                android:layout_width="195dp"
-                android:layout_height="172dp"
+                android:layout_width="162dp"
+                android:layout_height="162dp"
+                android:layout_below="@id/title"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/profile" />
-
+                android:layout_marginTop="51dp"
+                 />
             <Button
                 android:id="@+id/logout_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="7dp"
                 android:layout_toRightOf="@id/profileImage"
                 android:text="Logout"
-
                 android:textAlignment="center"
                 android:textSize="10sp" />
-
             <TextView
                 android:id="@+id/my_profile_name"
                 android:layout_width="wrap_content"
@@ -54,24 +63,20 @@
                 android:text="Profile Name"
                 android:textAlignment="center"
                 android:textColor="@android:color/primary_text_light"
-
                 android:textSize="21sp"
-
                 android:textStyle="bold" />
-
             <Button
                 android:id="@+id/edit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profileImage"
+                android:layout_below="@id/logout_button"
+                android:layout_toRightOf="@id/profileImage"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_toRightOf="@id/my_profile_name"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="130dp"
                 android:text="Edit Profile"
-
                 android:textAlignment="center"
                 android:textSize="12sp" />
-
             <TextView
                 android:id="@+id/my_user_name"
                 android:layout_width="match_parent"
@@ -81,22 +86,17 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="17sp"
-                android:textStyle="bold"
-
-                />
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/my_bio_title"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_user_name"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Bio:"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:textStyle="bold|italic"
-                />
-
-
+                android:textStyle="bold|italic" />
             <TextView
                 android:id="@+id/my_bio_info"
                 android:layout_width="382dp"
@@ -114,20 +114,17 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:gravity="top|left"/>
-
             <TextView
                 android:id="@+id/my_dob"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_bio_info"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Date of Birth:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
-
-
             <TextView
                 android:id="@+id/my_dob_info"
                 android:layout_width="match_parent"
@@ -138,21 +135,18 @@
                 android:text="info"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="19sp"
-                />
-
+                android:textSize="19sp" />
             <TextView
                 android:id="@+id/my_work"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_dob"
                 android:layout_marginTop="2dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Place of Work:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/my_work_info"
                 android:layout_width="match_parent"
@@ -164,14 +158,13 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="19sp" />
-
             <TextView
                 android:id="@+id/my_education"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_work"
                 android:layout_marginTop="2dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Education:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
@@ -186,16 +179,14 @@
                 android:text="info"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="19sp"
-                />
-
+                android:textSize="19sp" />
             <TextView
                 android:id="@+id/my_hometown"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_education"
                 android:layout_marginTop="2dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Hometown:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
@@ -210,12 +201,10 @@
                 android:text="info"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="19sp"
-                />
+                android:textSize="19sp" />
 
         </RelativeLayout>
 
     </ScrollView>
-
 
 </RelativeLayout>

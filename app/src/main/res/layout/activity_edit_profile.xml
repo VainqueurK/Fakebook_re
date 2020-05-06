@@ -28,25 +28,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="7dp"
                 android:text="Edit Profile"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-
                 android:textSize="30sp"
-
                 android:textStyle="bold" />
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profileImage"
-                android:layout_width="189dp"
-                android:layout_height="176dp"
+                android:layout_width="162dp"
+                android:layout_height="162dp"
                 android:layout_below="@id/title"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="51dp"
                 android:src="@drawable/profile" />
-
+            <Button
+                android:id="@+id/edit_image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/profileImage"
+                android:text="Edit Image"
+                android:textAlignment="center"
+                android:textSize="12sp" />
             <TextView
                 android:id="@+id/my_profile_name"
                 android:layout_width="wrap_content"
@@ -57,13 +65,8 @@
                 android:text="Profile Name"
                 android:textAlignment="center"
                 android:textColor="@android:color/primary_text_light"
-
                 android:textSize="21sp"
-
                 android:textStyle="bold" />
-
-
-
             <TextView
                 android:id="@+id/my_user_name"
                 android:layout_width="match_parent"
@@ -73,23 +76,18 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="17sp"
-                android:textStyle="bold"
-
-                />
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/my_bio_title"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_user_name"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Bio:"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:textStyle="bold|italic"
-                />
-
-
+                android:textStyle="bold|italic" />
             <EditText
                 android:id="@+id/my_bio_edit"
                 android:layout_width="398dp"
@@ -103,23 +101,18 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:gravity="top|left"
-                android:layout_margin="10dp"
-
-                />
-
+                android:layout_margin="10dp" />
             <TextView
                 android:id="@+id/my_dob"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_bio_edit"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Date of Birth:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
-
-
             <TextView
                 android:id="@+id/my_dob_edit"
                 android:layout_width="match_parent"
@@ -130,21 +123,18 @@
                 android:text="info"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="19sp"
-                 />
-
+                android:textSize="19sp" />
             <TextView
                 android:id="@+id/my_work"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_dob"
                 android:layout_marginTop="14dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Place of Work:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
-
             <EditText
                 android:id="@+id/my_work_edit"
                 android:layout_width="252dp"
@@ -156,14 +146,13 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="19sp" />
-
             <TextView
                 android:id="@+id/my_education"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_work"
                 android:layout_marginTop="12dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Education:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
@@ -178,16 +167,14 @@
                 android:text="info"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="19sp"
-                />
-
+                android:textSize="19sp" />
             <TextView
                 android:id="@+id/my_hometown"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_education"
                 android:layout_marginTop="12dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="Hometown:"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
@@ -202,8 +189,7 @@
                 android:text="info"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="19sp"
-                />
+                android:textSize="19sp" />
             <Button
                 android:id="@+id/done_button"
                 android:layout_width="wrap_content"
@@ -215,7 +201,6 @@
                 android:text="Save Changes"
                 android:textAlignment="center"
                 android:textSize="12sp" />
-
 
         </RelativeLayout>
 

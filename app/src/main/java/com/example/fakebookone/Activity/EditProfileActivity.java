@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +22,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +37,13 @@ public class EditProfileActivity extends AppCompatActivity {
     private DatabaseReference profileRef;
     private FirebaseAuth mAuth;
     private String currentUserId;
+
+    //Storage
+    private StorageReference profileImgReference;
+
+    private ImageView profileImage;
+
+    final static int Gallery_Pick = 1;
 
     private TextView tvFullName, tvUsername, tvDob;
     private EditText editTxtBio, editTxtWork, editTxtEducation, editTxtHometown;
@@ -45,11 +58,16 @@ public class EditProfileActivity extends AppCompatActivity {
         currentUserId = mAuth.getCurrentUser().getUid();
         profileRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
 
+        profileImgReference = FirebaseStorage.getInstance().getReference().child("profileImages");
+
 
         // Text Fields
         tvFullName = findViewById(R.id.my_profile_name);
         tvUsername = findViewById(R.id.my_user_name);
         tvDob = findViewById(R.id.my_dob_edit);
+
+        // Profile Image
+        profileImage = findViewById(R.id.profileImage);
 
         //Edit Text Fields
         editTxtBio = findViewById(R.id.my_bio_edit);
@@ -142,7 +160,54 @@ public class EditProfileActivity extends AppCompatActivity {
 
         });
 
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, Gallery_Pick );
+            }
+        });
 
+
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode == Gallery_Pick && resultCode == RESULT_OK && data != null) {
+            Uri imageUri = data.getData();
+
+            StorageReference filePath = profileImgReference.child(currentUserId + ".jpg");
+
+            filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if(task.isSuccessful()) {
+                        Toast.makeText(EditProfileActivity.this,"Your image has been added successfully", Toast.LENGTH_SHORT).show();
+
+                        final String downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl().toString();
+                        profileRef.child("imageurl").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task)
+                            {
+                                if(task.isSuccessful()) {
+                                    Toast.makeText(EditProfileActivity.this, "Image edited ", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    String message = task.getException().getMessage();
+                                    Toast.makeText(EditProfileActivity.this, "Error occured " + message, Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
 
 

@@ -2,18 +2,15 @@ package com.example.fakebookone.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.fakebookone.Activity.EditProfileActivity;
 import com.example.fakebookone.Activity.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,10 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import com.example.fakebookone.R;
-
-
 
 public class FragmentProfile extends Fragment {
 
@@ -33,11 +27,10 @@ public class FragmentProfile extends Fragment {
     private DatabaseReference profileRef;
     private FirebaseAuth mAuth;
     private String currentUserId;
-
-
     private TextView txtFieldProfileName, txtFieldUsername, txtFieldBio, txtFieldDob, txtFieldWork, txtFieldEducation, txtFieldHometown;
     private ImageView userProfileImage;
     private Button logoutBtn, editBtn;
+
 
 
     public FragmentProfile() {
@@ -60,9 +53,14 @@ public class FragmentProfile extends Fragment {
         //                                                                               specific unique id of user
         profileRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
 
+
         // Buttons
         logoutBtn = view.findViewById(R.id.logout_button);
         editBtn = view.findViewById(R.id.edit_button);
+
+        //Profile Image
+        userProfileImage = view.findViewById(R.id.profileImage);
+
 
         // Text Fields
         txtFieldProfileName = view.findViewById(R.id.my_profile_name);
@@ -128,6 +126,8 @@ public class FragmentProfile extends Fragment {
             }
         });
 
+
+
     }
 
     public void logout(View view)
@@ -140,6 +140,8 @@ public class FragmentProfile extends Fragment {
 
 
     }
+
+
 
 
 }
