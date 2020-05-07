@@ -81,12 +81,12 @@ public class FragmentProfile extends Fragment {
         if(StaticData.MYPROFILE!=null) {
             txtFieldUsername.setText("@" + StaticData.MYPROFILE.getUsername().toString());
             txtFieldProfileName.setText(StaticData.MYPROFILE.getFullName().toString());
-            txtFieldDob.setText(StaticData.MYPROFILE.getDataOfBirth().toString());
+            txtFieldDob.setText(StaticData.MYPROFILE.getDateOfBirth().toString());
 
             txtFieldBio.setText(StaticData.MYPROFILE.getBio().toString());
             txtFieldWork.setText(StaticData.MYPROFILE.getWork().toString());
             txtFieldEducation.setText(StaticData.MYPROFILE.getEducation().toString());
-            txtFieldHometown.setText(StaticData.MYPROFILE.getHometowm().toString());
+            txtFieldHometown.setText(StaticData.MYPROFILE.getHometown().toString());
         }
         else {
             profileRef.addValueEventListener(new ValueEventListener() {

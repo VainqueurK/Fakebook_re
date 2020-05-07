@@ -6,8 +6,8 @@ public class Profile {
     private String username = "";
     private String bio = "";
     private String fullName = "";
-    private String dataOfBirth = "";
-    private String hometowm = "";
+    private String dateOfBirth = "";
+    private String hometown = "";
     private String id = "";
     private String education = "";
     private String imageurl = "";
@@ -15,12 +15,12 @@ public class Profile {
     private ArrayList<String> friends=new ArrayList<String>();//UID of users
     private ArrayList<String> messages=new ArrayList<String>();//ID of messages
 
-    public Profile(String username, String bio, String fullName, String dataOfBirth, String hometowm, String id, String education, String imageurl, String work, ArrayList<String> friends, ArrayList<String> messages) {
+    public Profile(String username, String bio, String fullName, String dateOfBirth, String hometown, String id, String education, String imageurl, String work, ArrayList<String> friends, ArrayList<String> messages) {
         this.username = username;
         this.bio = bio;
         this.fullName = fullName;
-        this.dataOfBirth = dataOfBirth;
-        this.hometowm = hometowm;
+        this.dateOfBirth = dateOfBirth;
+        this.hometown = hometown;
         this.id = id;
         this.education = education;
         this.imageurl = imageurl;
@@ -29,12 +29,12 @@ public class Profile {
         this.messages = messages;
     }
 
-    public Profile(String username, String bio, String fullName, String dataOfBirth, String hometowm, String id, String education, String imageurl, String work) {
+    public Profile(String username, String bio, String fullName, String dateOfBirth, String hometown, String id, String education, String imageurl, String work) {
         this.username = username;
         this.bio = bio;
         this.fullName = fullName;
-        this.dataOfBirth = dataOfBirth;
-        this.hometowm = hometowm;
+        this.dateOfBirth = dateOfBirth;
+        this.hometown = hometown;
         this.id =id;
         this.education = education;
         this.imageurl = imageurl;
@@ -83,20 +83,20 @@ public class Profile {
         this.fullName = fullName;
     }
 
-    public String getDataOfBirth() {
-        return dataOfBirth;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDataOfBirth(String dataOfBirth) {
-        this.dataOfBirth = dataOfBirth;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getHometowm() {
-        return hometowm;
+    public String getHometown() {
+        return hometown;
     }
 
-    public void setHometowm(String hometowm) {
-        this.hometowm = hometowm;
+    public void setHometown(String hometown) {
+        this.hometown = hometown;
     }
 
     public String getId() {
@@ -153,8 +153,8 @@ public class Profile {
                 "username='" + username + '\'' +
                 ", bio='" + bio + '\'' +
                 ", fullName='" + fullName + '\'' +
-                ", dataOfBirth='" + dataOfBirth + '\'' +
-                ", hometowm='" + hometowm + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", hometown='" + hometown + '\'' +
                 ", id='" + id + '\'' +
                 ", education='" + education + '\'' +
                 ", imageurl='" + imageurl + '\'' +
