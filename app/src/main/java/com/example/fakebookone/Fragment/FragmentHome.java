@@ -99,8 +99,10 @@ public class FragmentHome extends Fragment {
     public void search(String str) {
         ArrayList<ChatSearchResults> myList = new ArrayList<ChatSearchResults>();
         for(ChatSearchResults object : list){
-            if(object.getUsername().toLowerCase().contains(str.toLowerCase())){
-                myList.add(object);
+            if(object.getUsername() != null) {
+                if (object.getUsername().toLowerCase().contains(str.toLowerCase())) {
+                    myList.add(object);
+                }
             }
         }
         ChatSearchAdapter adapterClass = new ChatSearchAdapter(myList, getContext());

@@ -261,8 +261,6 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
     private void loadImageByUri(){
-
-
         profileRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -271,19 +269,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
                     System.out.println( "this is the url : " + dBImageUrl);
-
                     Glide
                             .with(context)
                             .load(dBImageUrl)
                             .into(profileImage);
-
-
-
-
-
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

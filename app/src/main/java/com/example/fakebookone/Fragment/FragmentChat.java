@@ -66,11 +66,13 @@ public class FragmentChat extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists())
                     {
-                            list = new ArrayList<>();
-                            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                        list = new ArrayList<>();
+                        for(DataSnapshot ds : dataSnapshot.getChildren()){
                             list.add(ds.getValue(ChatSearchResults.class));
                         }
-                        ChatSearchAdapter adapterClass = new ChatSearchAdapter(list, context);
+                        com.example.fakebookone.Adapter.ChatSearchAdapter adapterClass = new ChatSearchAdapter(list, context);
+
+
                         resultList.setAdapter((RecyclerView.Adapter) adapterClass);
 
                     }
@@ -107,9 +109,11 @@ public class FragmentChat extends Fragment {
 
     public void search(String str) {
         ArrayList<ChatSearchResults> myList = new ArrayList<ChatSearchResults>();
-        for(ChatSearchResults object : myList){
-            if(object.getUsername().toLowerCase().contains(str.toLowerCase())){
-                myList.add(object);
+        for(ChatSearchResults object : list){
+            if(object.getUsername() != null) {
+                if (object.getUsername().toLowerCase().contains(str.toLowerCase())) {
+                    myList.add(object);
+                }
             }
         }
         ChatSearchAdapter adapterClass = new ChatSearchAdapter(myList, context);
@@ -158,7 +162,7 @@ public class FragmentChat extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-       public class dialogBox implements View.OnClickListener{
+    public class dialogBox implements View.OnClickListener{
         public dialogBox(){
             displayDialogBox();
         };
@@ -167,4 +171,4 @@ public class FragmentChat extends Fragment {
             displayDialogBox();
         }
     }
-    }
+}
