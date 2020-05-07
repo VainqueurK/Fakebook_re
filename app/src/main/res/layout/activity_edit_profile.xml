@@ -34,15 +34,15 @@
                 android:textColor="@android:color/black"
                 android:textSize="30sp"
                 android:textStyle="bold" />
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/profileImage"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
                 android:layout_width="162dp"
                 android:layout_height="162dp"
                 android:layout_below="@id/title"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="51dp"
-                android:src="@drawable/profile" />
+                 />
             <Button
                 android:id="@+id/edit_image_button"
                 android:layout_width="wrap_content"
@@ -51,15 +51,25 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/profileImage"
+                android:layout_toRightOf="@id/profile_image"
                 android:text="Edit Image"
                 android:textAlignment="center"
                 android:textSize="12sp" />
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_below="@+id/edit_image_button"
+                android:layout_toRightOf="@+id/profile_image"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                />
             <TextView
                 android:id="@+id/my_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profileImage"
+                android:layout_below="@id/profile_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:text="Profile Name"
