@@ -1,4 +1,4 @@
-package com.example.fakebookone.Misc;
+package com.example.fakebookone.Misc.Model;
 
 public class Post {
     private String publisher;

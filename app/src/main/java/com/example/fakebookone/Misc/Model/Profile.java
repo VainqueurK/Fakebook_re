@@ -1,4 +1,4 @@
-package com.example.fakebookone.Misc;
+package com.example.fakebookone.Misc.Model;
 
 import java.util.ArrayList;
 
