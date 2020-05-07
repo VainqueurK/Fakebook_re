@@ -18,7 +18,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.MessageUser"/>
         <activity android:name=".Activity.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

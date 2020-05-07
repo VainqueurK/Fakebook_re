@@ -1,5 +1,8 @@
 package com.example.fakebookone.Fragment;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,12 +33,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class FragmentChat extends Fragment {
-
+    static Context context;
     private View view;
     private EditText searchField;
     private RecyclerView resultList;
     private DatabaseReference mfakebookDataBase; //referencing the database
-    ArrayList<ChatSearchResults> list;
+    private ArrayList<ChatSearchResults> list;
+    private RecyclerView userList;
+    private ArrayList<ChatSearchResults> users;
     private FirebaseRecyclerAdapter ChatSearchAdapter;
 
     public FragmentChat() {
@@ -47,7 +53,6 @@ public class FragmentChat extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.chats, container, false);
-
         InitializeFields();
 
         return view;
@@ -62,11 +67,13 @@ public class FragmentChat extends Fragment {
                     if(dataSnapshot.exists())
                     {
                             list = new ArrayList<>();
-                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            for(DataSnapshot ds : dataSnapshot.getChildren()){
                             list.add(ds.getValue(ChatSearchResults.class));
                         }
-                        com.example.fakebookone.Adapter.ChatSearchAdapter adapterClass = new ChatSearchAdapter(list);
-                        resultList.setAdapter((RecyclerView.Adapter) ChatSearchAdapter);
+                        com.example.fakebookone.Adapter.ChatSearchAdapter adapterClass = new ChatSearchAdapter(list, context);
+
+
+                        resultList.setAdapter((RecyclerView.Adapter) adapterClass);
 
                     }
                 }
@@ -76,7 +83,10 @@ public class FragmentChat extends Fragment {
                     Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
+
+
         if(searchField != null){
             searchField.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -104,7 +114,7 @@ public class FragmentChat extends Fragment {
                 myList.add(object);
             }
         }
-        ChatSearchAdapter adapterClass = new ChatSearchAdapter(myList);
+        ChatSearchAdapter adapterClass = new ChatSearchAdapter(myList, context);
         resultList.setAdapter(adapterClass);
     }
 
@@ -125,6 +135,38 @@ public class FragmentChat extends Fragment {
 
 
     }
-}
 
 
+    //Dialog box displayed on click
+
+    public void displayDialogBox(){
+        // setup the alert builder
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Choose an option");
+        //set up a list
+        String[] options = {"Chat", "View user profile", "Follow user",};
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0: // Chat
+                    case 1: // View user profile
+                    case 2: // Follow user
+                }
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+       public class dialogBox implements View.OnClickListener{
+        public dialogBox(){
+            displayDialogBox();
+        };
+        @Override
+        public void onClick(View v) {
+            displayDialogBox();
+        }
+    }
+    }
