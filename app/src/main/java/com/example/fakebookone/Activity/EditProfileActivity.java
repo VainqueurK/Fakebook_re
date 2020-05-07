@@ -2,17 +2,25 @@ package com.example.fakebookone.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,14 +33,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class EditProfileActivity extends AppCompatActivity {
 
     Map<String,String> userValues = new HashMap<>();
-    Button doneBtn;
+    Button doneBtn, editImgBtn;
 
     private DatabaseReference profileRef;
     private FirebaseAuth mAuth;
@@ -41,12 +52,22 @@ public class EditProfileActivity extends AppCompatActivity {
     //Storage
     private StorageReference profileImgReference;
 
-    private ImageView profileImage;
+    private CircleImageView profileImage;
 
     final static int Gallery_Pick = 1;
 
     private TextView tvFullName, tvUsername, tvDob;
     private EditText editTxtBio, editTxtWork, editTxtEducation, editTxtHometown;
+
+    private static final int MY_PERMISSIONS_REQUEST = 100;
+
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    private ProgressBar progressBar;
+
+    private Uri imgUri;
+
+    private Context context = EditProfileActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +81,25 @@ public class EditProfileActivity extends AppCompatActivity {
 
         profileImgReference = FirebaseStorage.getInstance().getReference().child("profileImages");
 
-
         // Text Fields
         tvFullName = findViewById(R.id.my_profile_name);
         tvUsername = findViewById(R.id.my_user_name);
         tvDob = findViewById(R.id.my_dob_edit);
 
         // Profile Image
-        profileImage = findViewById(R.id.profileImage);
+        profileImage = findViewById(R.id.profile_image);
 
         //Edit Text Fields
         editTxtBio = findViewById(R.id.my_bio_edit);
         editTxtWork = findViewById(R.id.my_work_edit);
         editTxtEducation = findViewById(R.id.my_education_edit);
         editTxtHometown = findViewById(R.id.my_hometown_edit);
+
+        //Button
+
+        requestStoragePermission();
+
+        loadImageByUri();
 
 
 
@@ -159,8 +185,9 @@ public class EditProfileActivity extends AppCompatActivity {
             }
 
         });
+        editImgBtn = findViewById(R.id.edit_image_button);
 
-        profileImage.setOnClickListener(new View.OnClickListener() {
+       editImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -169,6 +196,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 startActivityForResult(intent, Gallery_Pick );
             }
         });
+
+       // loadImageByInternetUrl();
+
 
 
     }
@@ -180,6 +210,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
         if(requestCode == Gallery_Pick && resultCode == RESULT_OK && data != null) {
             Uri imageUri = data.getData();
+            /*
+            Glide
+                    .with(context)
+                    .load(imageUri)
+                    .into(profileImage);
+*/
+
 
             StorageReference filePath = profileImgReference.child(currentUserId + ".jpg");
 
@@ -189,8 +226,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     if(task.isSuccessful()) {
                         Toast.makeText(EditProfileActivity.this,"Your image has been added successfully", Toast.LENGTH_SHORT).show();
 
-                        final String downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl().toString();
-                        profileRef.child("imageurl").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                      //  final String downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl().toString();
+                        profileRef.child("imageurl").setValue(imageUri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task)
                             {
@@ -210,8 +247,48 @@ public class EditProfileActivity extends AppCompatActivity {
         }
     }
 
+    private void requestStoragePermission() {
+        if(ContextCompat.checkSelfPermission(EditProfileActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(EditProfileActivity.this,new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+    private void loadImageByUri(){
+
+
+        profileRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+
+                    String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
+                    System.out.println( "this is the url : " + dBImageUrl);
+
+                    Glide
+                            .with(context)
+                            .load(dBImageUrl)
+                            .into(profileImage);
 
 
 
 
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 }

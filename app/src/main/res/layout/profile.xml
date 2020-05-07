@@ -34,7 +34,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileImage"
                 android:layout_width="162dp"
                 android:layout_height="162dp"

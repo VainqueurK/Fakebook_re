@@ -1,6 +1,7 @@
 package com.example.fakebookone.Fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,8 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.example.fakebookone.Activity.EditProfileActivity;
 import com.example.fakebookone.Activity.MainActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +25,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.example.fakebookone.R;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FragmentProfile extends Fragment {
 
@@ -28,9 +37,8 @@ public class FragmentProfile extends Fragment {
     private FirebaseAuth mAuth;
     private String currentUserId;
     private TextView txtFieldProfileName, txtFieldUsername, txtFieldBio, txtFieldDob, txtFieldWork, txtFieldEducation, txtFieldHometown;
-    private ImageView userProfileImage;
+    private CircleImageView userProfileImage;
     private Button logoutBtn, editBtn;
-
 
 
     public FragmentProfile() {
@@ -44,7 +52,6 @@ public class FragmentProfile extends Fragment {
         return view;
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -53,14 +60,12 @@ public class FragmentProfile extends Fragment {
         //                                                                               specific unique id of user
         profileRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
 
-
         // Buttons
         logoutBtn = view.findViewById(R.id.logout_button);
         editBtn = view.findViewById(R.id.edit_button);
 
         //Profile Image
         userProfileImage = view.findViewById(R.id.profileImage);
-
 
         // Text Fields
         txtFieldProfileName = view.findViewById(R.id.my_profile_name);
@@ -72,6 +77,9 @@ public class FragmentProfile extends Fragment {
         txtFieldHometown = view.findViewById(R.id.my_hometown_info);
 
 
+        loadImageByUri();
+
+
         profileRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -81,8 +89,6 @@ public class FragmentProfile extends Fragment {
                     String dBFullName =  dataSnapshot.child("fullName").getValue().toString();
                     String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
                     String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
-
-
 
                     String dBBio = dataSnapshot.child("bio").getValue().toString();
                     String dBWork = dataSnapshot.child("work").getValue().toString();
@@ -137,7 +143,30 @@ public class FragmentProfile extends Fragment {
         sendToLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(sendToLogin);
 
+    }
 
+    private void loadImageByUri(){
+        profileRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+                    String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
+                    System.out.println( "this is the uri : " + dBImageUrl);
+
+                    Glide
+                            .with(userProfileImage)
+                            .load(dBImageUrl).placeholder(R.drawable.profile)
+                            .into(userProfileImage);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
