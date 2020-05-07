@@ -51,8 +51,8 @@ public class UserpageActivity extends AppCompatActivity
         username = findViewById(R.id.usernameText);
         bio = findViewById(R.id.bioText);
 
-        connect = findViewById(R.id.connectButton);
-        message = findViewById(R.id.messageButton);
+      //  connect = findViewById(R.id.connectButton);
+       // message = findViewById(R.id.messageButton);
 
         imageProfile = findViewById(R.id.profilePic);
         backButton = findViewById(R.id.backButton);

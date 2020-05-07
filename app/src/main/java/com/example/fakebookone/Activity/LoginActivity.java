@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fakebookone.Misc.Model.Profile;
+import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView register;
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
+    Profile myProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -88,8 +91,10 @@ public class LoginActivity extends AppCompatActivity {
                                 reference.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                                        myProfile=dataSnapshot.getValue(Profile.class);
+                                        StaticData.MYPROFILE=myProfile;
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
                                         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.fakebookone.Activity.EditProfileActivity;
 import com.example.fakebookone.Activity.MainActivity;
+import com.example.fakebookone.Misc.StaticData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,41 +79,50 @@ public class FragmentProfile extends Fragment {
 
 
         loadImageByUri();
+        if(StaticData.MYPROFILE!=null) {
+            txtFieldUsername.setText("@" + StaticData.MYPROFILE.getUsername().toString());
+            txtFieldProfileName.setText(StaticData.MYPROFILE.getFullName().toString());
+            txtFieldDob.setText(StaticData.MYPROFILE.getDataOfBirth().toString());
 
+            txtFieldBio.setText(StaticData.MYPROFILE.getBio().toString());
+            txtFieldWork.setText(StaticData.MYPROFILE.getWork().toString());
+            txtFieldEducation.setText(StaticData.MYPROFILE.getEducation().toString());
+            txtFieldHometown.setText(StaticData.MYPROFILE.getHometowm().toString());
+        }
+        else {
+            profileRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String dBUsername = dataSnapshot.child("username").getValue().toString();
+                        String dBFullName = dataSnapshot.child("fullName").getValue().toString();
+                        String dBImageUrl = dataSnapshot.child("imageurl").getValue().toString();
+                        String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
 
-        profileRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists())
-                {
-                    String dBUsername =  dataSnapshot.child("username").getValue().toString();
-                    String dBFullName =  dataSnapshot.child("fullName").getValue().toString();
-                    String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
-                    String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
+                        String dBBio = dataSnapshot.child("bio").getValue().toString();
+                        String dBWork = dataSnapshot.child("work").getValue().toString();
+                        String dBEducation = dataSnapshot.child("education").getValue().toString();
+                        String dBHometown = dataSnapshot.child("hometown").getValue().toString();
 
-                    String dBBio = dataSnapshot.child("bio").getValue().toString();
-                    String dBWork = dataSnapshot.child("work").getValue().toString();
-                    String dBEducation = dataSnapshot.child("education").getValue().toString();
-                    String dBHometown = dataSnapshot.child("hometown").getValue().toString();
+                        // Setting Text Views to DB Values
+                        txtFieldUsername.setText("@" + dBUsername);
+                        txtFieldProfileName.setText(dBFullName);
+                        txtFieldDob.setText(dBDob);
 
-                    // Setting Text Views to DB Values
-                    txtFieldUsername.setText("@" + dBUsername);
-                    txtFieldProfileName.setText(dBFullName);
-                    txtFieldDob.setText( dBDob);
+                        txtFieldBio.setText(dBBio);
+                        txtFieldWork.setText(dBWork);
+                        txtFieldEducation.setText(dBEducation);
+                        txtFieldHometown.setText(dBHometown);
 
-                    txtFieldBio.setText(dBBio);
-                    txtFieldWork.setText(dBWork);
-                    txtFieldEducation.setText(dBEducation);
-                    txtFieldHometown.setText(dBHometown);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+            });
+        }
 
         // On Logout
         logoutBtn.setOnClickListener(new View.OnClickListener() {

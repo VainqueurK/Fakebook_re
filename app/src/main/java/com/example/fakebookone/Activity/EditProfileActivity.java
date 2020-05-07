@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.fakebookone.Misc.Model.Profile;
+import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +37,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +46,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfileActivity extends AppCompatActivity {
 
     Map<String,String> userValues = new HashMap<>();
+    
     Button doneBtn, editImgBtn;
 
     private DatabaseReference profileRef;
@@ -109,10 +113,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 if(dataSnapshot.exists())
                 {
                     String dBUsername =  dataSnapshot.child("username").getValue().toString();
-                    String dBFullName =  dataSnapshot.child("fullName").getValue().toString();
-                    String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
-                    String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
-
+                      String dBFullName =  dataSnapshot.child("fullName").getValue().toString();
+                      String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
+                      String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
+                   
+                    
                     // Setting Text Views to DB Values
                     tvUsername.setText("@" + dBUsername);
                     tvFullName.setText(dBFullName);
@@ -122,7 +127,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     String dBWork = dataSnapshot.child("work").getValue().toString();
                     String dBEducation = dataSnapshot.child("education").getValue().toString();
                     String dBHometown = dataSnapshot.child("hometown").getValue().toString();
-
+                    
                     // Setting Edit Texts to DB Values
                     editTxtBio.setText(dBBio);
                     editTxtWork.setText(dBWork);
@@ -130,7 +135,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     editTxtHometown.setText(dBHometown);
 
                     // Adding Values to HashMap
-                    userValues.put("username",dBUsername);
+                   /* userValues.put("username",dBUsername);
                     userValues.put("fullName",dBFullName);
                     userValues.put("imageurl",dBImageUrl);
                     userValues.put("dateOfBirth",dBDob);
@@ -138,7 +143,24 @@ public class EditProfileActivity extends AppCompatActivity {
                     userValues.put("work",dBWork);
                     userValues.put("education",dBEducation);
                     userValues.put("hometown",dBHometown);
+                    
+                    */
+                    ArrayList<String>friends=new ArrayList<>();
+                    ArrayList<String>messages=new ArrayList<>();
 
+                   if(dataSnapshot.child("friends").getValue()!=null){
+                       if(dataSnapshot.child("friends").getValue() instanceof ArrayList){
+                           friends= (ArrayList<String>) dataSnapshot.child("friends").getValue();
+                       }
+                   }
+                    if(dataSnapshot.child("messages").getValue()!=null){
+                        if(dataSnapshot.child("messages").getValue() instanceof ArrayList){
+                            messages= (ArrayList<String>) dataSnapshot.child("messages").getValue();
+                        }
+                    }
+
+                    Profile editedProfile=new Profile(dBUsername,dBBio,dBFullName,dBDob,dBHometown,currentUserId,dBEducation,dBImageUrl,dBWork,friends,messages);
+                    StaticData.MYPROFILE=editedProfile;
                 }
             }
 
@@ -157,6 +179,19 @@ public class EditProfileActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
 
                 // These values always remain unchanged, (adding them back again)
+                Profile editedProfile=new Profile(
+                        userValues.get("username") ,
+                        editTxtBio.getText().toString(),
+                        userValues.get("fullName") ,
+                        userValues.get("dateOfBirth") ,
+                        editTxtHometown.getText().toString(),
+                        currentUserId,
+                        editTxtEducation.getText().toString(),
+                        userValues.get("imageurl"),
+                        editTxtWork.getText().toString(),
+                        StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getFriends():new ArrayList<>(),
+                        StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getFriends():new ArrayList<>());
+               /*
                 hashMap.put("id", currentUserId);
                 hashMap.put("username", userValues.get("username") );
                 hashMap.put("fullName", userValues.get("fullName") );
@@ -168,15 +203,16 @@ public class EditProfileActivity extends AppCompatActivity {
                 hashMap.put("work", editTxtWork.getText().toString());
                 hashMap.put("education", editTxtEducation.getText().toString());
                 hashMap.put("hometown", editTxtHometown.getText().toString());
+                */
 
 
-
-                profileRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                profileRef.setValue(editedProfile).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful())
                         {
                             Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
+                            StaticData.MYPROFILE=editedProfile;
                             intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         }

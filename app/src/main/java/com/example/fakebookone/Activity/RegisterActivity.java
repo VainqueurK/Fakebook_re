@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fakebookone.Fragment.DatePickerFragment;
+import com.example.fakebookone.Misc.Model.Profile;
+import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -127,7 +130,8 @@ public class RegisterActivity extends AppCompatActivity implements DatePickerDia
                     reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
                     HashMap<String, Object> hashMap = new HashMap<>();
-                    hashMap.put("id", userId);
+
+                   /* hashMap.put("id", userId);
                     hashMap.put("username", username);
                     hashMap.put("imageurl", "gs://fakebookone-11dcd.appspot.com/profilepic.png");//james you need to modify this hashmap to includ extra information for later
                     hashMap.put("fullName", fullName);
@@ -139,13 +143,31 @@ public class RegisterActivity extends AppCompatActivity implements DatePickerDia
                     hashMap.put("education","");
                     hashMap.put("hometown","");
 
+                    */
+                   Profile myProfile=new Profile(
+                        username,
+                        "",
+                        fullName,
+                        dateOfBirth,
+                        "",
+                        userId,
+                        "",
+                        "gs://fakebookone-11dcd.appspot.com/profilepic.png",
+                        "",
+                        new ArrayList<>(),
+                        new ArrayList<>()
 
-                    reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                );
+
+                    reference.setValue(myProfile).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
                             {
+
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                StaticData.MYPROFILE=myProfile;
                                 intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                             }
