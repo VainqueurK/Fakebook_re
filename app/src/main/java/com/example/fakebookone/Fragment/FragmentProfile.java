@@ -27,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.example.fakebookone.R;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -97,6 +96,9 @@ public class FragmentProfile extends Fragment {
                         String dBUsername = dataSnapshot.child("username").getValue().toString();
                         String dBFullName = dataSnapshot.child("fullName").getValue().toString();
                         String dBImageUrl = dataSnapshot.child("imageurl").getValue().toString();
+
+                        System.out.println(dataSnapshot.child("dateOfBirth").getValue());
+
                         String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
 
                         String dBBio = dataSnapshot.child("bio").getValue().toString();

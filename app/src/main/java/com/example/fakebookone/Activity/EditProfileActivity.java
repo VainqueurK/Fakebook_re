@@ -115,6 +115,9 @@ public class EditProfileActivity extends AppCompatActivity {
                     String dBUsername =  dataSnapshot.child("username").getValue().toString();
                       String dBFullName =  dataSnapshot.child("fullName").getValue().toString();
                       String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
+
+                      System.out.println(dataSnapshot.child("dateOfBirth").getValue());
+
                       String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
                    
                     
