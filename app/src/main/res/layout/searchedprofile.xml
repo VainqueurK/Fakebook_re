@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/profileButton"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,27 +35,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/resultUsername"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="323dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="bottom|center|left"
-                android:text="userName"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/resultSearchName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|top|left"
-                android:text="uniqueUsername"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/resultUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="bottom|center|left"
+                    android:text="userName"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/resultSearchName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|top|left"
+                    android:text="uniqueUsername"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

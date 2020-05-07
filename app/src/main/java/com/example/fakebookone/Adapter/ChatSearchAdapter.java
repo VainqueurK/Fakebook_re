@@ -40,6 +40,7 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
         return list.size();
     }
 
+
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nameText, bioText;
         public MyViewHolder(@NonNull View itemView) {
