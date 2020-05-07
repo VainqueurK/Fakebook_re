@@ -118,8 +118,7 @@ public class EditProfileActivity extends AppCompatActivity {
                       System.out.println(dataSnapshot.child("dateOfBirth").getValue());
 
                       String dBDob = dataSnapshot.child("dateOfBirth").getValue().toString();
-                   
-                    
+
                     // Setting Text Views to DB Values
                     tvUsername.setText("@" + dBUsername);
                     tvFullName.setText(dBFullName);
