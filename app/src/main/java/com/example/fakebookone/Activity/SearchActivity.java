@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -27,35 +30,21 @@ public class SearchActivity extends AppCompatActivity {
     private FirebaseRecyclerAdapter searchAdapter;
     ArrayList<SearchResults> list;
     private RecyclerView resultList;
+    private ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchuser);
 
+        back = findViewById(R.id.exitSearch);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SearchActivity.this, MainActivity.class));
+            }
+        });
 
-        if(mfakebookDataBase != null){
-            mfakebookDataBase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.exists())
-                    {
-                        list = new ArrayList<>();
-                        for(DataSnapshot ds : dataSnapshot.getChildren()){
-                            list.add(ds.getValue(SearchResults.class));
-                        }
-                        //SearchAdapter adapterClass = new SearchAdapter(list, SearchActivity.this);
-                        //resultList.setAdapter((RecyclerView.Adapter) adapterClass);
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(SearchActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
     }
 }

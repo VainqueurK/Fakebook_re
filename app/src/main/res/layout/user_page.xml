@@ -37,7 +37,7 @@
                     android:foregroundTint="#000000"
                     android:tint="#000000"
                     android:tintMode="src_atop"
-                    app:srcCompat="@drawable/ic_action_name" />
+                    app:srcCompat="@drawable/back" />
 
                 <TextView
                     android:id="@+id/usernameText"
@@ -108,7 +108,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="0"
-                            android:textColor="#000000"
+                            android:textColor="#FF9800"
                             android:textSize="24sp"
                             android:textStyle="bold" />
 
@@ -139,7 +139,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="0"
-                            android:textColor="#000000"
+                            android:textColor="#FF9800"
                             android:textSize="24sp"
                             android:textStyle="bold" />
 
@@ -151,24 +151,51 @@
                         android:layout_gravity="center"
                         android:orientation="horizontal">
 
-                        <Button
-                            android:id="@+id/messageButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="message"
-                            android:textSize="10sp" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                        <Button
-                            android:id="@+id/connectButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="connect"
-                            android:textSize="10sp" />
+                            <ImageButton
+                                android:id="@+id/imageButton2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTint="#00FFFFFF"
+                                android:tint="#FF9800"
+                                app:srcCompat="@drawable/cnct" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/imageButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_weight="1"
+                                android:backgroundTint="#00FFFFFF"
+                                android:foregroundTint="#FF9800"
+                                android:tint="#FF9800"
+                                app:srcCompat="@drawable/chat" />
+                        </FrameLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="User FullName"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/bioText"
@@ -193,11 +220,19 @@
         </FrameLayout>
     </ScrollView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="379dp"
-        android:layout_height="177dp"
-        android:paddingTop="10dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="373dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="390dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="177dp"
+            android:paddingTop="10dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

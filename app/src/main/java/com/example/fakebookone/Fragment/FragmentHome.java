@@ -60,7 +60,7 @@ public class FragmentHome extends Fragment {
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                startActivity(new Intent(getContext(), SearchActivity.class));
             }
         });
 
