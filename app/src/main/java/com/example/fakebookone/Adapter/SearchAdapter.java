@@ -15,19 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fakebookone.Activity.SearchActivity;
 import com.example.fakebookone.Activity.UserpageActivity;
-import com.example.fakebookone.Misc.ChatSearchResults;
+import com.example.fakebookone.Misc.SearchResults;
 import com.example.fakebookone.R;
 
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder>{
 
-    ArrayList<ChatSearchResults> list;
-    //private final Context context;
+    ArrayList<SearchResults> list;
+    private Context context;
+    private String uid;
 
 
-    public SearchAdapter(ArrayList<ChatSearchResults> list){
+    public SearchAdapter(ArrayList<SearchResults> list, Context context1 )
+    {
         this.list = list;
+        this.context = context1;
     }
 
     @NonNull
@@ -42,6 +45,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
         holder.nameText.setText(list.get(position).getUsername());
         holder.bioText.setText(list.get(position).getBio());
+        uid = list.get(position).getUsername();
+
+        holder.profileButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(context, UserpageActivity.class);
+                intent.putExtra("uid", uid);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -59,15 +74,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             super(itemView);
             nameText = itemView.findViewById(R.id.resultUsername);
             bioText = itemView.findViewById(R.id.resultSearchName);
-           // profileButton = itemView.findViewById(R.id.profileButton;
+            profileButton = itemView.findViewById(R.id.profileButton);
 
-            //profileButton.setOnClickListener(new View.OnClickListener() {
-              //  @Override
-              //  public void onClick(View v) {
-                   // Intent intent = new Intent(, UserpageActivity.class);
-                    //context.startActivity(intent);
-              //  }
-          //  });
         }
     }
 }
