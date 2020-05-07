@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -80,12 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    auth.signInWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isComplete())
-                            {
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getCurrentUser().getUid());
+                    auth.signInWithEmailAndPassword(strEmail, strPassword).addOnSuccessListener((task)->{
+                        FirebaseUser user=task.getUser();
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
 
                                 reference.addValueEventListener(new ValueEventListener() {
                                     @Override
@@ -103,13 +101,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                     }
                                 });
-                            }
-                            else {
-                                Toast.makeText(LoginActivity.this , "Authentication has failed", Toast.LENGTH_SHORT).show();
-                            }
+                            }).addOnFailureListener(e->{
+                                Toast.makeText(LoginActivity.this , e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
                         }
-                    });
-                }
+
+
             }
         });
     }
