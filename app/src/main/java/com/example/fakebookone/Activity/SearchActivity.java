@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 
+import com.example.fakebookone.Adapter.SearchAdapter;
 import com.example.fakebookone.Misc.Model.Profile;
 import com.example.fakebookone.Misc.SearchResults;
 import com.example.fakebookone.R;
@@ -55,10 +56,15 @@ public class SearchActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i = 0;
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
                     //get all users;
                     profiles.add(ds.getValue(Profile.class));
+                    System.out.println(profiles.get(i));
+                    i++;
                 }
+
+                SearchAdapter sa = new SearchAdapter(profiles);
             }
 
             @Override

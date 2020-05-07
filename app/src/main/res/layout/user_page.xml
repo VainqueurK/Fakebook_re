@@ -37,7 +37,7 @@
                     android:foregroundTint="#000000"
                     android:tint="#000000"
                     android:tintMode="src_atop"
-                    app:srcCompat="@drawable/back" />
+                    app:srcCompat="@drawable/back2" />
 
                 <TextView
                     android:id="@+id/usernameText"
@@ -152,35 +152,38 @@
                         android:orientation="horizontal">
 
                         <FrameLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="75dp"
+                            android:layout_height="99dp"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/imageButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:backgroundTint="#00FFFFFF"
+                                android:foregroundTint="#FF9800"
+                                android:tint="#FF9800"
+                                app:srcCompat="@drawable/chat"
+                                tools:srcCompat="@drawable/back" />
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="71dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
                             <ImageButton
                                 android:id="@+id/imageButton2"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:backgroundTint="#00FFFFFF"
                                 android:tint="#FF9800"
                                 app:srcCompat="@drawable/cnct" />
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <ImageButton
-                                android:id="@+id/imageButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:layout_weight="1"
-                                android:backgroundTint="#00FFFFFF"
-                                android:foregroundTint="#FF9800"
-                                android:tint="#FF9800"
-                                app:srcCompat="@drawable/chat" />
                         </FrameLayout>
 
                     </LinearLayout>
