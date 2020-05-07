@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 
-
+import com.example.fakebookone.Misc.Model.Profile;
 import com.example.fakebookone.Misc.SearchResults;
 import com.example.fakebookone.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -29,6 +29,7 @@ public class SearchActivity extends AppCompatActivity {
     private DatabaseReference mfakebookDataBase = FirebaseDatabase.getInstance().getReference("Users");
     private FirebaseRecyclerAdapter searchAdapter;
     ArrayList<SearchResults> list;
+    ArrayList<Profile> profiles;
     private RecyclerView resultList;
     private ImageButton back;
 
@@ -37,8 +38,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchuser);
 
+        loadUsers();//get all user in data base
         back = findViewById(R.id.exitSearch);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,5 +47,24 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+    }
+    //async
+    private void loadUsers(){
+
+        DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("Users");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds:dataSnapshot.getChildren()){
+                    //get all users;
+                    profiles.add(ds.getValue(Profile.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
