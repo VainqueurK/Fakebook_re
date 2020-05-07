@@ -25,10 +25,9 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
 
 
     ArrayList<ChatSearchResults> list;
-    Context mContext;
-    public ChatSearchAdapter(ArrayList<ChatSearchResults> list, Context context){
+
+    public ChatSearchAdapter(ArrayList<ChatSearchResults> list){
         this.list = list;
-        this.mContext = context;
     }
 
     @NonNull

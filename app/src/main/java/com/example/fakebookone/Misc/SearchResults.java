@@ -5,7 +5,7 @@ import android.widget.Button;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchResults  {
-    public String username, bio, uid;
+    public String username, bio, id;
 
     public SearchResults()
     {
@@ -14,7 +14,7 @@ public class SearchResults  {
     public SearchResults(String username, String bio, String uid) {
         this.username = username;
         this.bio = bio;
-        this.uid = uid;
+        this.id = uid;
     }
 
     public String getUsername() {
@@ -22,11 +22,11 @@ public class SearchResults  {
     }
 
     public String getUid() {
-        return uid;
+        return id;
     }
 
     public void setUid(String Uid) {
-        this.uid = Uid;
+        this.id = Uid;
     }
 
     public void setUsername(String username) {

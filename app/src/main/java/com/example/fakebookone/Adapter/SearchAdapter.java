@@ -45,7 +45,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
         holder.nameText.setText(list.get(position).getUsername());
         holder.bioText.setText(list.get(position).getBio());
-        uid = list.get(position).getUsername();
+        uid = list.get(position).getUid();
 
         holder.profileButton.setOnClickListener(new View.OnClickListener()
         {

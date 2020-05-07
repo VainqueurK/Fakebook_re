@@ -125,9 +125,6 @@ public class FragmentProfile extends Fragment {
 
             }
         });
-
-
-
     }
 
     public void logout(View view)

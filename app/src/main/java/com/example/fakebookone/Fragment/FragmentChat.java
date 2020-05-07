@@ -36,7 +36,7 @@ public class FragmentChat extends Fragment {
 
     ArrayList<ChatSearchResults> list;
     private DatabaseReference mfakebookDataBase; //referencing the database
-    private FirebaseRecyclerAdapter ChatSearchAdapter;
+    private FirebaseRecyclerAdapter chatSearchAdapter;
 
     public FragmentChat() {
 
@@ -67,7 +67,7 @@ public class FragmentChat extends Fragment {
                             list.add(ds.getValue(ChatSearchResults.class));
                         }
                         com.example.fakebookone.Adapter.ChatSearchAdapter adapterClass = new ChatSearchAdapter(list);
-                        resultList.setAdapter((RecyclerView.Adapter) ChatSearchAdapter);
+                        resultList.setAdapter((RecyclerView.Adapter) chatSearchAdapter);
 
                     }
                 }
