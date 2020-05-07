@@ -132,6 +132,7 @@ public class RegisterActivity extends AppCompatActivity implements DatePickerDia
                     hashMap.put("imageurl", "gs://fakebookone-11dcd.appspot.com/profilepic.png");//james you need to modify this hashmap to includ extra information for later
                     hashMap.put("fullName", fullName);
                     hashMap.put("dateOfBirth", dateOfBirth);
+
                     // The user can add to these later in Edit Profile
                     hashMap.put("bio", "");
                     hashMap.put("work","");

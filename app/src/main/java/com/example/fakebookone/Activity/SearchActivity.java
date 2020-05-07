@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 
-import com.example.fakebookone.Adapter.SearchAdapter;
+
 import com.example.fakebookone.Misc.SearchResults;
 import com.example.fakebookone.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -45,8 +45,8 @@ public class SearchActivity extends AppCompatActivity {
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
                             list.add(ds.getValue(SearchResults.class));
                         }
-                        SearchAdapter adapterClass = new SearchAdapter(list, SearchActivity.this);
-                        resultList.setAdapter((RecyclerView.Adapter) adapterClass);
+                        //SearchAdapter adapterClass = new SearchAdapter(list, SearchActivity.this);
+                        //resultList.setAdapter((RecyclerView.Adapter) adapterClass);
 
                     }
                 }

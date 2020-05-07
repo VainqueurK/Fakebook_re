@@ -5,52 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home">
+
     <Toolbar
+        android:id="@+id/toolbar4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="4dp">
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Fake"
+                    android:textColor="#FF9800"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/usernameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="book"
+                    android:textColor="#000000"
+                    android:textSize="24sp" />
+
                 <ImageButton
-                    android:id="@+id/leavesearch"
+                    android:id="@+id/searchButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="220dp"
                     android:layout_weight="1"
-                    android:background="#00000000"
-                    android:backgroundTint="#000000"
-                    android:foregroundTint="#000000"
-                    android:paddingRight="50px"
-                    android:tint="#000000"
-                    app:srcCompat="@drawable/ic_action_name" />
-
-                <EditText
-                    android:id="@+id/search_field"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#00FFFFFF"
-                    android:ems="10"
-                    android:hint="Search Users"
-                    android:inputType="textPersonName" />
-
+                    android:backgroundTint="#00FFFFFF"
+                    android:src="@drawable/ic_action_name"
+                    android:tint="#000000" />
             </LinearLayout>
 
         </FrameLayout>
 
     </Toolbar>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/usernameText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="book"
+            android:textColor="#000000"
+            android:textSize="24sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat_list"
