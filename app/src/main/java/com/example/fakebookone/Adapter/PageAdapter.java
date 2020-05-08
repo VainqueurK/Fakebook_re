@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.fakebookone.Fragment.FragmentChat;
+import com.example.fakebookone.Fragment.FragmentConnections;
 import com.example.fakebookone.Fragment.FragmentHome;
 import com.example.fakebookone.Fragment.FragmentProfile;
 
@@ -24,10 +25,12 @@ public class PageAdapter extends FragmentPagerAdapter {
         switch(position){
             case 0:
                 return new FragmentChat();
-            case 1:
-                return new FragmentHome();
             case 2:
+                return new FragmentHome();
+            case 3:
                 return new FragmentProfile();
+            case 1:
+                return new FragmentConnections();
             default:
                 return null;
         }
