@@ -1,6 +1,5 @@
 package com.example.fakebookone.Fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -10,17 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SearchView;
-import android.widget.Toast;
-
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fakebookone.Adapter.ChatSearchAdapter;
+import com.example.fakebookone.Adapter.ConnectionsAdapter;
 import com.example.fakebookone.Misc.ChatSearchResults;
 import com.example.fakebookone.Misc.Model.ChatRoom;
 import com.example.fakebookone.Misc.Model.Message;
@@ -29,12 +28,12 @@ import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,20 +42,20 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class FragmentChat extends Fragment {
+public class FragmentConnections extends Fragment {
     static Context context;
     private View view;
     private EditText searchField;
     private RecyclerView resultList;
     private DatabaseReference mfakebookDataBase; //referencing the database
    //private ArrayList<ChatSearchResults> list;
-    private ArrayList<Profile> friends;
+    private ArrayList<Profile> friends=new ArrayList<>();
     private RecyclerView userList;
     private ArrayList<ChatSearchResults> users;
     private FirebaseRecyclerAdapter ChatSearchAdapter;
     private ArrayList<ChatRoom> chatRooms=new ArrayList<>();
 
-    public FragmentChat() {
+    public FragmentConnections() {
 
     }
     public void onCreate() {
@@ -65,32 +64,39 @@ public class FragmentChat extends Fragment {
     @Nullable
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.chats, container, false);
-        InitializeFields();
+        view = inflater.inflate(R.layout.connect_lists, container, false);
+
 
         return view;
     }
 
+    ConnectionsAdapter connAdapter;
     public void onStart() {
         super.onStart();
+        InitializeFields();
+
+        connAdapter = new ConnectionsAdapter(friends, context);
+        LinearLayoutManager llm = new LinearLayoutManager(context);
+        resultList.setLayoutManager(llm);
+
+        resultList.setAdapter((RecyclerView.Adapter) connAdapter);
         if(FirebaseAuth.getInstance().getCurrentUser()!=null&&StaticData.MYPROFILE==null)
-            FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(
-                    new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            StaticData.MYPROFILE=dataSnapshot.getValue(Profile.class);
-                            loadPrevConversation();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
+                        StaticData.MYPROFILE=dataSnapshot.getValue(Profile.class);
+                        loadProfiles();
                     }
-            );
-        else
-        loadPrevConversation();
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );
+        else loadProfiles();
 
        /*if(mfakebookDataBase != null){
             mfakebookDataBase.addValueEventListener(new ValueEventListener() {
@@ -116,7 +122,7 @@ public class FragmentChat extends Fragment {
                 }
             });
 
-        }
+        }*/
 
 
         if(searchField != null){
@@ -136,19 +142,21 @@ public class FragmentChat extends Fragment {
 
                 }
             });
-        }*/
+        }
     }
 
-    public void loadPrevConversation(){
-        for(String key : StaticData.MYPROFILE.getMessage_keys()){
-            String[]users=key.split("-");
-            String otherUid=users[0].contains(StaticData.MYPROFILE.getId())?users[1]:users[0];
-            Profile peer=null;
-            FirebaseDatabase.getInstance().getReference().child("Users").child(otherUid).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void loadProfiles(){
+        friends.clear();
+        for(String uid : StaticData.MYPROFILE.getFriends()){
+            System.out.println(uid);
+            FirebaseDatabase.getInstance().getReference().child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    loadMessage(dataSnapshot.getValue(Profile.class),key);
+                 friends.add(dataSnapshot.getValue(Profile.class));
+                    //connAdapter = new ConnectionsAdapter(friends, context);
+                    //resultList.setAdapter((RecyclerView.Adapter) connAdapter);
+                    connAdapter.notifyDataSetChanged();
 
                 }
 
@@ -161,58 +169,16 @@ public class FragmentChat extends Fragment {
 
 
     }
-    private void loadMessage(Profile peer, String key) {
-
-        ChatRoom room=new ChatRoom(key, StaticData.MYPROFILE,peer);
-        FirebaseFirestore.getInstance().collection("Messages").document(key).collection(key).orderBy("timestamp").limit(1).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
-
-                Message message=null;
-                assert queryDocumentSnapshots != null;
-                for (DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()){
-                   message=ds.toObject(Message.class);
-               }
-                if(message!=null){
-                    room.setTimestamp(message.getTimestamp());
-                    room.setLastMessage(message);
-                    chatRooms.add(room);
-                    //TODO: update ui
-                    com.example.fakebookone.Adapter.ChatSearchAdapter adapterClass = new ChatSearchAdapter(chatRooms, context);
-
-
-                    resultList.setAdapter((RecyclerView.Adapter) adapterClass);
-
-                }
-            }
-
-        });
-        FirebaseFirestore.getInstance().collection("Messages").document(key).collection(key).orderBy("timestamp").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
-
-                ArrayList<Message> messages=new ArrayList<>();
-                assert queryDocumentSnapshots != null;
-                for (DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()){
-                    messages.add(ds.toObject(Message.class));
-                }
-                room.setMessages(messages);
-                //TODO: go to chat page
-
-            }
-        });
-    }
     public void search(String str) {
-        ArrayList<ChatRoom> myList = new ArrayList<ChatRoom>();
-        for(ChatRoom object : chatRooms){
-            if(object.getUserTwo().getUsername() != null) {
-                if (object.getUserTwo().getUsername().toLowerCase().contains(str.toLowerCase())) {
-                    myList.add(object);
+        ArrayList<Profile> myList = new ArrayList<>();
+        for(Profile f : friends){
+            if(f.getUsername() != null) {
+                if (f.getUsername().toLowerCase().contains(str.toLowerCase())) {
+                    myList.add(f);
                 }
             }
         }
-        ChatSearchAdapter adapterClass = new ChatSearchAdapter(myList, context);
-        resultList.setAdapter(adapterClass);
+        connAdapter.notifyDataSetChanged();
     }
 
 // HELPER FUNCTIONS
@@ -221,11 +187,11 @@ public class FragmentChat extends Fragment {
 
         //initialize search view
         if (view.findViewById(R.id.search_field) != null) {
-            searchField = view.findViewById(R.id.search_field);
+            searchField = view.findViewById(R.id.connection_search);
         }
         //initialize recyclerView
-        if (view.findViewById(R.id.chat_list) != null) {
-            resultList = view.findViewById(R.id.chat_list);
+        if (view.findViewById(R.id.connections_list) != null) {
+            resultList = view.findViewById(R.id.connections_list);
         }
         //initialize database reference
         mfakebookDataBase = FirebaseDatabase.getInstance().getReference("Users");
