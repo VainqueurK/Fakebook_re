@@ -91,7 +91,7 @@ public class EditProfileActivity extends AppCompatActivity {
         tvDob = findViewById(R.id.my_dob_edit);
 
         // Profile Image
-        profileImage = findViewById(R.id.profile_image);
+        profileImage = findViewById(R.id.postImage);
 
         //Edit Text Fields
         editTxtBio = findViewById(R.id.my_bio_edit);
