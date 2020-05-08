@@ -12,9 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fakebookone.Activity.LoginActivity;
 import com.example.fakebookone.Activity.MessageUser;
+import com.example.fakebookone.Activity.UserpageActivity;
 import com.example.fakebookone.Fragment.FragmentChat;
 import com.example.fakebookone.Misc.ChatSearchResults;
 import com.example.fakebookone.Misc.Model.Profile;
@@ -26,10 +29,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
 
     ArrayList<Profile> list;
+    Context context;
 
-    public SearchAdapter(ArrayList<Profile> list)
+    public SearchAdapter(ArrayList<Profile> list, Context context)
     {
         this.list = list;
+        this.context = context;
     }
 
     @NonNull
@@ -44,6 +49,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     {
         holder.nameText.setText(list.get(position).getUsername());
         holder.bioText.setText(list.get(position).getBio());
+
+        holder.button.setOnClickListener( e ->
+        {
+            Intent i = new Intent(context, UserpageActivity.class);
+            i.putExtra("profileId", list.get(position).getId());
+            context.startActivity(i);
+        });
     }
 
     @Override
@@ -55,6 +67,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         public View mView;
         LinearLayout parentLayout;
         TextView nameText, bioText;
+        LinearLayoutCompat button;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,6 +75,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             parentLayout = itemView.findViewById(R.id.parent_layout);
             nameText = itemView.findViewById(R.id.resultUsername);
             bioText = itemView.findViewById(R.id.resultSearchName);
+            button = itemView.findViewById(R.id.profileButton);
         }
     }
 }

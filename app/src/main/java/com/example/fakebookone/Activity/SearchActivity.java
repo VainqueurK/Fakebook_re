@@ -6,8 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -25,19 +29,52 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity
+{
 
-    private DatabaseReference mfakebookDataBase = FirebaseDatabase.getInstance().getReference("Users");
-    private FirebaseRecyclerAdapter searchAdapter;
     ArrayList<SearchResults> list;
-    ArrayList<Profile> profiles;
+    ArrayList<Profile> profiles = new ArrayList<>();
     private RecyclerView resultList;
     private ImageButton back;
+    private EditText searchField;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onStart()
+    {
+        super.onStart();
+        if(searchField != null)
+        {
+            searchField.addTextChangedListener(new TextWatcher()
+            {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after)
+                {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count)
+                {
+                    search(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s)
+                {
+
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchuser);
+
+        resultList = findViewById(R.id.searchList);
+        searchField = findViewById(R.id.searchBar);
 
         loadUsers();//get all user in data base
         back = findViewById(R.id.exitSearch);
@@ -48,9 +85,34 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        if(searchField != null)
+        {
+            searchField.addTextChangedListener(new TextWatcher()
+            {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after)
+                {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count)
+                {
+                    search(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s)
+                {
+
+                }
+            });
+        }
+
     }
     //async
-    private void loadUsers(){
+    private void loadUsers()
+    {
 
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("Users");
         ref.addValueEventListener(new ValueEventListener() {
@@ -64,7 +126,8 @@ public class SearchActivity extends AppCompatActivity {
                     i++;
                 }
 
-                SearchAdapter sa = new SearchAdapter(profiles);
+                SearchAdapter sa = new SearchAdapter(profiles, SearchActivity.this);
+                resultList.setAdapter((RecyclerView.Adapter) sa);
             }
 
             @Override
@@ -73,4 +136,22 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void search(String str)
+    {
+        ArrayList<Profile> myList = new ArrayList<Profile>();
+        for(Profile p : profiles)
+        {
+            if(p.getUsername() != null)
+            {
+                if (p.getUsername().toLowerCase().contains(str.toLowerCase()))
+                {
+                    myList.add(p);
+                }
+            }
+        }
+        SearchAdapter adapterClass = new SearchAdapter(myList, SearchActivity.this);
+        resultList.setAdapter(adapterClass);
+    }
+
 }

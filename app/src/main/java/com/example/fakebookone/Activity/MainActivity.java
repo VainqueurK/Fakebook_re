@@ -1,5 +1,6 @@
 package com.example.fakebookone.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.PagerAdapter;
@@ -10,11 +11,17 @@ import android.os.Bundle;
 
 import com.example.fakebookone.Activity.LoginActivity;
 import com.example.fakebookone.Adapter.PageAdapter;
+import com.example.fakebookone.Misc.Model.Profile;
+import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +46,20 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+        FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                StaticData.MYPROFILE = dataSnapshot.getValue(Profile.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+
+            }
+        });
+
         //toolbar.setTitle("test");
 
 
@@ -53,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(pageAdapter);
 
         viewPager.setCurrentItem(1);
-        viewPager.setCurrentItem(1, true);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

@@ -107,7 +107,9 @@ public class FragmentProfile extends Fragment {
                         String dBHometown = dataSnapshot.child("hometown").getValue().toString();
 
                         // Setting Text Views to DB Values
-                        txtFieldUsername.setText("@" + dBUsername);
+
+                        txtFieldUsername.setText(dBUsername);
+
                         txtFieldProfileName.setText(dBFullName);
                         txtFieldDob.setText(dBDob);
 

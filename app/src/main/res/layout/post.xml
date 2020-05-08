@@ -6,73 +6,91 @@
     android:layout_height="wrap_content"
     android:padding="5dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
+
+        android:id="@+id/profileButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:visibility="visible">
+        android:clickable="true">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:id="@+id/parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="103dp"
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="10px"
+            android:background="#F1F1F1"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/profilePic"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/postImage"
+                android:layout_width="173dp"
+                android:layout_height="48dp"
+                android:layout_above="@+id/my_profile_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="219dp"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:foregroundTint="#000000"
+                android:src="@drawable/profile"
+                android:tint="#000000"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
 
             <LinearLayout
-                android:layout_width="339dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/userID"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="username"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="content" />
-
-                <ImageView
-                    android:id="@+id/picture"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/fui_ic_mail_white_24dp" />
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/like"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/postUsername"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/profile" />
+                            android:layout_weight="1"
+                            android:text="userName"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
+                        <TextView
+                            android:id="@+id/postDate"
+                            android:layout_width="115dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="date" />
                     </LinearLayout>
 
-                </FrameLayout>
+                    <TextView
+                        android:id="@+id/postContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|top|left"
+                        android:text="uniqueUsername"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
