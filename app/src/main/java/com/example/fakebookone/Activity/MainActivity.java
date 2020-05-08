@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         final PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
 
-        viewPager.setCurrentItem(1);
-        viewPager.setCurrentItem(1, true);
+        viewPager.setCurrentItem(2);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
