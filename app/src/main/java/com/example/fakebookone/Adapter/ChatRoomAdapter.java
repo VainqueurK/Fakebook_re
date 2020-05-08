@@ -64,7 +64,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.MyView
                 holder.cardView.setLayoutParams(lp);
             }
             else if((list.get(position).getSender().equals(profile.getId())) ) {
-                holder.cardView.setCardBackgroundColor(0xFFFFECD0);
+                holder.cardView.setCardBackgroundColor(0xF87D5FF);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 lp.gravity = Gravity.LEFT;
                 holder.cardView.setLayoutParams(lp);

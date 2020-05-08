@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Collections;
 import java.util.Date;
 
 
@@ -87,6 +88,7 @@ public class MessageUser extends AppCompatActivity {
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                 if(queryDocumentSnapshots!=null)
                 {
+                    Collections.reverse(queryDocumentSnapshots.getDocuments());
                     for (DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()){
                         chatRoom.getMessages().add(ds.toObject(Message.class));
                     }
