@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fakebookone.Misc.Model.Post;
+import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,14 +36,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
        View view = LayoutInflater.from(mContext).inflate(R.layout.post, parent, false);
 
         return new PostAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+    {
+
 
     }
 
@@ -53,19 +57,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView profilePic, like, picture;
-        public TextView description, publisher;
+        public ImageView profilePic;
+        public TextView description, publisher, postDate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-           profilePic = itemView.findViewById(R.id.profilePic);
-           profilePic = itemView.findViewById(R.id.like);
-           profilePic = itemView.findViewById(R.id.userID);
-           profilePic = itemView.findViewById(R.id.description);
-           profilePic = itemView.findViewById(R.id.picture);
-
-
+           profilePic = itemView.findViewById(R.id.postImage);
+           description = itemView.findViewById(R.id.postContent);
+           publisher = itemView.findViewById(R.id.postUsername);
+           postDate = itemView.findViewById(R.id.postDate);
         }
     }
 
