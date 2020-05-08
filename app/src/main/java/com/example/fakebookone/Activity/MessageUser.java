@@ -29,7 +29,7 @@ public class MessageUser extends AppCompatActivity {
 
         }
         private void getIncomingIntent(){
-            if(getIntent().hasExtra("profile_list")){
+            if(getIntent().hasExtra("profile_lis")){
                 String list = getIntent().getStringExtra("profile_list");
             }
         }
