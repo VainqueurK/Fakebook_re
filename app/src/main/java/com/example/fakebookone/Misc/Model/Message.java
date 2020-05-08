@@ -1,6 +1,8 @@
 package com.example.fakebookone.Misc.Model;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
     private String content;
     private long timestamp;
     private String sender;
