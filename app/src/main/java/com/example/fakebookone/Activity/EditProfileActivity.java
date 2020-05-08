@@ -197,7 +197,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getMessages():new ArrayList<>(),
                         StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getMessage_keys():new ArrayList<>()
                         );
-                System.out.println(editedProfile);
+
                /*
                 hashMap.put("id", currentUserId);
                 hashMap.put("username", userValues.get("username") );
