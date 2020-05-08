@@ -20,53 +20,71 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="41dp"-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/messages_list_users"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="627dp"
-        android:layout_above="@+id/chat_linear_layout"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
-        android:background="@android:color/background_light" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/chat_linear_layout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messages_list_users"
+            android:layout_width="match_parent"
+            android:layout_height="627dp"
+            android:background="@android:color/background_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.586"
+            app:reverseLayout="true">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="46dp"
-        android:background="@android:color/darker_gray"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/send_image_file_button"
-            android:layout_width="50dp"
+        <LinearLayout
+            android:id="@+id/chat_linear_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src ="@drawable/icon_select_image"
-            />
+            android:background="#056A6565"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.998">
 
-        <EditText
-            android:id="@+id/input_message"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="Enter your message..."
-            android:padding="17dp" />
+            <EditText
+                android:id="@+id/input_message"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter your message..."
+                android:padding="17dp" />
 
-        <ImageButton
-            android:id="@+id/send_message_button"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:src = "@drawable/icon_send"
-            />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/send_message_button"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@color/fui_transparent"
+                    android:src="@drawable/icon_send"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.538" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
