@@ -43,7 +43,6 @@ public class UserpageActivity extends AppCompatActivity
     CircleImageView imageProfile;
     TextView posts, connects, username, bio, postCount, connectCount, fullName, location, occupation;
     ImageButton connect, message, back;
-    ImageButton backButton;
 
     FirebaseUser firebaseUser;
     String profileId;
