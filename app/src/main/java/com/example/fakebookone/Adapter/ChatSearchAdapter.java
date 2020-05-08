@@ -14,27 +14,25 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fakebookone.Activity.MessageUser;
 import com.example.fakebookone.Fragment.FragmentChat;
 import com.example.fakebookone.Misc.ChatSearchResults;
-import com.example.fakebookone.Misc.Model.ChatRoom;
-import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
-
-import org.ocpsoft.prettytime.PrettyTime;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.MyViewHolder>{
 
 
-    ArrayList<ChatRoom> list;
+    ArrayList<ChatSearchResults> list;
     Context mContext;
-    public ChatSearchAdapter(ArrayList<ChatRoom> list, Context context){
+    public ChatSearchAdapter(ArrayList<ChatSearchResults> list, Context context){
         this.list = list;
         this.mContext = context;
     }
@@ -42,27 +40,22 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_user, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.searchedprofile, viewGroup, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.username.setText(list.get(position).getUserTwo().getUsername());
-        switch(list.get(position).getLastMessage().getType()){
-            case 1:{
-                holder.latest.setText(list.get(position).getLastMessage().getSender().equals(StaticData.MYPROFILE.getId())?"you sent a picture":"Sent a picture");
-            }break;
-            default:{
-                holder.latest.setText(list.get(position).getLastMessage().getContent());
-            }break;
-        }
-        PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
-        String ago = prettyTime.format(new Date(list.get(position).getLastMessage().getTimestamp()));
-        holder.latest.setText(ago);
+        holder.nameText.setText(list.get(position).getUsername());
+        holder.bioText.setText(list.get(position).getBio());
 
+        // Displays profile picture
+        Glide
+                .with(holder.myProfileImage)
+                .load(list.get(position).getImageurl())
+                .into(holder.myProfileImage);
 
-        holder.chatTile.setOnClickListener(new View.OnClickListener(){
+        holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 //Toast.makeText(v.getContext(), "hello", Toast.LENGTH_SHORT).show();
@@ -71,8 +64,6 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
                 v.getContext().startActivity(intent);
             }
         });
-        //TODO add image link
-
     }
 
     @Override
@@ -82,18 +73,17 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         public View mView;
-        LinearLayout chatTile;
-        CircleImageView chat_profile_image;
-        TextView username, latest, timestamp;
+        LinearLayout parentLayout;
+        TextView nameText, bioText;
+        CircleImageView myProfileImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            chatTile = itemView.findViewById(R.id.chat_tile);
-            chat_profile_image = itemView.findViewById(R.id.chat_profile_image);
-            latest = itemView.findViewById(R.id.chat_latest);
-            username = itemView.findViewById(R.id.chat_username);
-            timestamp = itemView.findViewById(R.id.chat_timestamp);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
+            nameText = itemView.findViewById(R.id.resultUsername);
+            bioText = itemView.findViewById(R.id.resultSearchName);
+            myProfileImage = itemView.findViewById(R.id.profile_image_search);
         }
     }
 }
