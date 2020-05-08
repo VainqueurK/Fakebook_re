@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TabItem tab1,tab2,tab3;
+    private TabItem tab1,tab2,tab3,tab4;
     private PagerAdapter pagerAdapter;
 
 
@@ -44,21 +44,22 @@ public class MainActivity extends AppCompatActivity {
         {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        }
+        }else
+        FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
-                StaticData.MYPROFILE = dataSnapshot.getValue(Profile.class);
-            }
+                        StaticData.MYPROFILE=dataSnapshot.getValue(Profile.class);
+                        System.out.println("profile = "+StaticData.MYPROFILE);
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
-            {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                    }
+                }
+        );
 
         //toolbar.setTitle("test");
 
@@ -67,13 +68,15 @@ public class MainActivity extends AppCompatActivity {
         TabItem tab1 = findViewById(R.id.tab1);
         TabItem tab2 = findViewById(R.id.tab2);
         TabItem tab3 = findViewById(R.id.tab3);
+        TabItem tab4 = findViewById(R.id.tab4);
 
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
         final PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
 
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(2);
+        viewPager.setCurrentItem(2, true);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -91,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else if(tab.getPosition() == 2)
+                {
+                    pageAdapter.notifyDataSetChanged();
+                }
+                else if(tab.getPosition() == 4)
                 {
                     pageAdapter.notifyDataSetChanged();
                 }

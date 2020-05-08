@@ -19,13 +19,19 @@ import com.example.fakebookone.R;
 public class MessageUser extends AppCompatActivity {
 
         View view;
-        private ImageButton SendMessageButton, SendImageFileButton;
+        private ImageButton sendMessageButton, SendImageFileButton;
+        private EditText messageField;
 
         public void onCreate(@Nullable Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.message_user);
-            getIncomingIntent();
+          messageField = findViewById(R.id.input_message);
+          sendMessageButton =findViewById(R.id.send_message_button);
+
+          sendMessageButton.setOnClickListener(e->{
+              
+          });
 
         }
         private void getIncomingIntent(){

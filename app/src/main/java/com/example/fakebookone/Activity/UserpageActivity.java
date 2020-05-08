@@ -84,7 +84,8 @@ public class UserpageActivity extends AppCompatActivity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserpageActivity.this, SearchActivity.class));
+                finish();
+                //startActivity(new Intent(UserpageActivity.this, SearchActivity.class));
             }
         });
 
