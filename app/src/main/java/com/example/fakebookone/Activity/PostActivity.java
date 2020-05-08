@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.fakebookone.Adapter.PostAdapter;
 import com.example.fakebookone.R;
 
 public class PostActivity extends AppCompatActivity
@@ -53,5 +54,7 @@ public class PostActivity extends AppCompatActivity
                 }
             }
         });
+
+
     }
 }

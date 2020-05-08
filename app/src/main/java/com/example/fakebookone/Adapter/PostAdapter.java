@@ -10,9 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fakebookone.Misc.Model.Post;
+import com.example.fakebookone.Misc.Model.Profile;
 import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
+import com.firebase.ui.auth.data.model.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
@@ -46,8 +51,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Post post = mPost.get(position);
 
+        if(post.getDescription().equals(""))
+        {
+            holder.description.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.description.setVisibility(View.VISIBLE);
+            holder.description.setText(post.getDescription());
+        }
 
+        publisherInfo(holder.profilePic, holder.publisher, holder.postDate);
     }
 
     @Override
@@ -70,13 +87,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 
-    private void publisherInfo(ImageView profilePic, ImageView picture, TextView username, TextView desc){
+    private void publisherInfo(ImageView profilePic, TextView username, TextView date){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(String.valueOf(username));
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                Profile user = dataSnapshot.getValue(Profile.class);
+                Glide.with(mContext).load(user.getImageurl()).into(profilePic);
+                username.setText(user.getUsername());
 
+
+
+                date = LocalDateTime.now();
             }
 
             @Override
