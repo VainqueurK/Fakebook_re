@@ -12,26 +12,31 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/cancelPost"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="320dp"
                 android:backgroundTint="#00FFFFFF"
                 android:tint="#000000"
                 app:srcCompat="@drawable/cancl" />
 
-            <ImageButton
-                android:id="@+id/postPost"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#00FFFFFF"
-                android:paddingRight="30dp"
-                app:srcCompat="@drawable/icon_send" />
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/postPost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/icon_send" />
+            </FrameLayout>
+
         </LinearLayout>
 
         <EditText

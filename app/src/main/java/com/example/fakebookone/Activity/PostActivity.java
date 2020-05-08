@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -27,6 +29,8 @@ public class PostActivity extends AppCompatActivity
 
         postInput.setText(null);
 
+        String onYourMind = postInput.getText().toString();
+
         backButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -43,13 +47,11 @@ public class PostActivity extends AppCompatActivity
             {
                 System.out.println(postInput.getText());
 
-                if (!postInput.getText().equals(null)) //somehow not working
+                if (onYourMind != "") //somehow not working
                 {
-                    startActivity(new Intent(PostActivity.this, MainActivity.class));
+
                 }
             }
         });
-
-
     }
 }
