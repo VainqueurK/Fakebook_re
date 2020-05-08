@@ -118,11 +118,11 @@ public class UserpageActivity extends AppCompatActivity
                 Map<String, Object> temp = new HashMap<>();
                 temp.put("friends", friends);
                 Map<String, Object> temp2 = new HashMap<>();
-                temp.put("friends", friends2);
+                temp2.put("friends", friends2);
                 Map<String, Object> temp3 = new HashMap<>();
-                temp.put("message_keys", keys);
+                temp3.put("message_keys", keys);
                 Map<String, Object> temp4 = new HashMap<>();
-                temp.put("message_keys", keys2);
+                temp4.put("message_keys", keys2);
 
                 FirebaseDatabase.getInstance().getReference().child("Users").child(StaticData.MYPROFILE.getId()).updateChildren(temp2).addOnSuccessListener(s -> {});
 
