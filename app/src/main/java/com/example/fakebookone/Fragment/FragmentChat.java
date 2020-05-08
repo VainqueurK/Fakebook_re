@@ -94,9 +94,13 @@ public class FragmentChat extends Fragment {
                     {
                         list = new ArrayList<>();
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
+
                             list.add(ds.getValue(ChatSearchResults.class));
+
                         }
                         com.example.fakebookone.Adapter.ChatSearchAdapter adapterClass = new ChatSearchAdapter(list, context);
+
+                        System.out.println(list);
 
 
                         resultList.setAdapter((RecyclerView.Adapter) adapterClass);

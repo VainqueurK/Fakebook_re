@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/postImage"
+            android:id="@+id/profile_image_search"
             android:layout_width="173dp"
             android:layout_height="96dp"
             android:layout_above="@+id/my_profile_name"
@@ -27,7 +27,6 @@
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:foregroundTint="#000000"
-            android:src="@drawable/profile"
             android:tint="#000000"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp" />
@@ -56,7 +55,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/resultContent"
+                    android:id="@+id/resultSearchName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

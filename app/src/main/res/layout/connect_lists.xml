@@ -58,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="160px"
+            android:paddingTop="20dp"
             android:paddingBottom="200px" />
     </FrameLayout>
 </RelativeLayout>

@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#00FFFFFF"
+                android:paddingRight="30dp"
                 app:srcCompat="@drawable/icon_send" />
         </LinearLayout>
 
@@ -40,7 +41,7 @@
             android:layout_marginTop="30dp"
             android:ems="10"
             android:gravity="center"
-            android:hint="What's on your mind?"
+            android:hint="What's on your mind?                                                                                                                                                                                                                                                                                                                       "
             android:inputType="textPersonName"
             android:padding="20dp" />
     </LinearLayout>

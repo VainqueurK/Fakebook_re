@@ -70,7 +70,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private Uri imgUri;
-    private String url = "";
+    private String url;
 
     private Context context = EditProfileActivity.this;
 
@@ -192,7 +192,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         !editTxtHometown.getText().toString().isEmpty()?editTxtHometown.getText().toString():StaticData.MYPROFILE.getHometown(),
                         currentUserId,
                         !editTxtEducation.getText().toString().isEmpty()?editTxtEducation.getText().toString():StaticData.MYPROFILE.getEducation(),
-                        !url.isEmpty()?url:StaticData.MYPROFILE.getImageurl(),
+                        !url.isEmpty()?url:StaticData.MYPROFILE.getFullName(),
                         !editTxtWork.getText().toString().isEmpty()?editTxtWork.getText().toString():StaticData.MYPROFILE.getWork(),
                         StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getFriends():new ArrayList<>(),
                         StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getMessages():new ArrayList<>(),

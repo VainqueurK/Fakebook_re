@@ -74,7 +74,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
             parentLayout = itemView.findViewById(R.id.parent_layout);
             nameText = itemView.findViewById(R.id.resultUsername);
-            bioText = itemView.findViewById(R.id.resultContent);
+            bioText = itemView.findViewById(R.id.resultSearchName);
             button = itemView.findViewById(R.id.profileButton);
         }
     }
