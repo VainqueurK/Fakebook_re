@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         //toolbar.setTitle("test");
 
-
+//release1
         TabLayout tabLayout = findViewById(R.id.tabBar);
         TabItem tab1 = findViewById(R.id.tab1);
         TabItem tab2 = findViewById(R.id.tab2);
