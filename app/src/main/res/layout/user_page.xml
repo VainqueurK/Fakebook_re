@@ -47,6 +47,31 @@
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
                     android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/messageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00FFFFFF"
+                    android:foregroundTint="#FF9800"
+                    android:paddingLeft="90dp"
+                    android:tint="black"
+                    app:srcCompat="@drawable/chat"
+                    tools:srcCompat="@drawable/back" />
+
+                <ImageButton
+                    android:id="@+id/connectButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00FFFFFF"
+                    android:tint="black"
+                    app:srcCompat="@drawable/cnct" />
+
+
             </LinearLayout>
 
         </FrameLayout>
@@ -157,17 +182,6 @@
                             android:layout_height="99dp"
                             android:layout_weight="1">
 
-                            <ImageButton
-                                android:id="@+id/messageButton"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:layout_weight="1"
-                                android:backgroundTint="#00FFFFFF"
-                                android:foregroundTint="#FF9800"
-                                android:tint="#FF9800"
-                                app:srcCompat="@drawable/chat"
-                                tools:srcCompat="@drawable/back" />
 
                         </FrameLayout>
 
@@ -176,15 +190,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <ImageButton
-                                android:id="@+id/connectButton"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:layout_weight="1"
-                                android:backgroundTint="#00FFFFFF"
-                                android:tint="#FF9800"
-                                app:srcCompat="@drawable/cnct" />
+
                         </FrameLayout>
 
                     </LinearLayout>
