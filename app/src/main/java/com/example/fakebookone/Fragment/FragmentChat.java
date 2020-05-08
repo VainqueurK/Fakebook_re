@@ -180,7 +180,7 @@ public class FragmentChat extends Fragment {
                     //TODO: update ui
                     com.example.fakebookone.Adapter.ChatSearchAdapter adapterClass = new ChatSearchAdapter(chatRooms, context);
 
-
+//fix
                     resultList.setAdapter((RecyclerView.Adapter) adapterClass);
 
                 }
