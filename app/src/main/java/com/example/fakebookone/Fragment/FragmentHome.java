@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fakebookone.Activity.LoginActivity;
 import com.example.fakebookone.Activity.MainActivity;
+import com.example.fakebookone.Activity.PostActivity;
 import com.example.fakebookone.Activity.RegisterActivity;
 import com.example.fakebookone.Activity.SearchActivity;
 import com.example.fakebookone.Adapter.ChatSearchAdapter;
@@ -41,7 +42,7 @@ public class FragmentHome extends Fragment {
     private View view;
     private EditText searchField;
     private RecyclerView resultList;
-    private ImageButton SearchButton;
+    private ImageButton SearchButton, postButton;
 
     public FragmentHome() {
 
@@ -55,12 +56,21 @@ public class FragmentHome extends Fragment {
         view = inflater.inflate(R.layout.home, container, false);
 
         SearchButton = view.findViewById(R.id.searchButton);
+        postButton = view.findViewById(R.id.postButton);
 
-
-        SearchButton.setOnClickListener(new View.OnClickListener() {
+        SearchButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), SearchActivity.class));
+            }
+        });
+
+        postButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), PostActivity.class));
             }
         });
 
