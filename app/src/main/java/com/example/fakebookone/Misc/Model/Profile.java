@@ -14,6 +14,24 @@ public class Profile {
     private String work = "";
     private ArrayList<String> friends=new ArrayList<String>();//UID of users
     private ArrayList<String> messages=new ArrayList<String>();//ID of messages
+    private ArrayList<String> message_keys=new ArrayList<String>();//ID of messages
+
+    public Profile(String username, String bio, String fullName, String dateOfBirth, String hometown, String id, String education, String imageurl, String work, ArrayList<String> friends, ArrayList<String> messages, ArrayList<String> message_keys) {
+        this.username = username;
+        this.bio = bio;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.hometown = hometown;
+        this.id = id;
+        this.education = education;
+        this.imageurl = imageurl;
+        this.work = work;
+        this.friends = friends;
+        this.messages = messages;
+        this.message_keys = message_keys;
+    }
+
+
 
     public Profile(String username, String bio, String fullName, String dateOfBirth, String hometown, String id, String education, String imageurl, String work, ArrayList<String> friends, ArrayList<String> messages) {
         this.username = username;
@@ -90,7 +108,13 @@ public class Profile {
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+    public ArrayList<String> getMessage_keys() {
+        return message_keys;
+    }
 
+    public void setMessage_keys(ArrayList<String> message_keys) {
+        this.message_keys = message_keys;
+    }
     public String getHometown() {
         return hometown;
     }

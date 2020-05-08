@@ -162,6 +162,7 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+
                     String dBImageUrl =  dataSnapshot.child("imageurl").getValue().toString();
                     System.out.println( "this is the uri : " + dBImageUrl);
                     Glide

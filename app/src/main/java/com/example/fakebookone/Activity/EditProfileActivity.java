@@ -69,6 +69,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private Uri imgUri;
+    private String url;
 
     private Context context = EditProfileActivity.this;
 
@@ -105,10 +106,11 @@ public class EditProfileActivity extends AppCompatActivity {
         loadImageByUri();
 
 
-
+        System.out.println("retrieving data----");
         profileRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 if(dataSnapshot.exists())
                 {
                     String dBUsername =  dataSnapshot.child("username").getValue().toString();
@@ -161,6 +163,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
 
                     Profile editedProfile=new Profile(dBUsername,dBBio,dBFullName,dBDob,dBHometown,currentUserId,dBEducation,dBImageUrl,dBWork,friends,messages);
+                    System.out.println(editedProfile);
                     StaticData.MYPROFILE=editedProfile;
                 }
             }
@@ -181,17 +184,20 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 // These values always remain unchanged, (adding them back again)
                 Profile editedProfile=new Profile(
-                        userValues.get("username") ,
-                        editTxtBio.getText().toString(),
-                        userValues.get("fullName") ,
-                        userValues.get("dateOfBirth") ,
-                        editTxtHometown.getText().toString(),
+                        !tvUsername.getText().toString().isEmpty()?tvUsername.getText().toString():StaticData.MYPROFILE.getUsername() ,
+                        !editTxtBio.getText().toString().isEmpty()? editTxtBio.getText().toString():StaticData.MYPROFILE.getBio(),
+                        !tvFullName.getText().toString().isEmpty()?tvFullName.getText().toString():StaticData.MYPROFILE.getFullName(),
+                        !tvDob.getText().toString().isEmpty()?tvDob.getText().toString():StaticData.MYPROFILE.getDateOfBirth(),
+                        !editTxtHometown.getText().toString().isEmpty()?editTxtHometown.getText().toString():StaticData.MYPROFILE.getHometown(),
                         currentUserId,
-                        editTxtEducation.getText().toString(),
-                        userValues.get("imageurl"),
-                        editTxtWork.getText().toString(),
+                        !editTxtEducation.getText().toString().isEmpty()?editTxtEducation.getText().toString():StaticData.MYPROFILE.getEducation(),
+                        !url.isEmpty()?url:StaticData.MYPROFILE.getFullName(),
+                        !editTxtWork.getText().toString().isEmpty()?editTxtWork.getText().toString():StaticData.MYPROFILE.getWork(),
                         StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getFriends():new ArrayList<>(),
-                        StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getFriends():new ArrayList<>());
+                        StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getMessages():new ArrayList<>(),
+                        StaticData.MYPROFILE!=null?StaticData.MYPROFILE.getMessage_keys():new ArrayList<>()
+                        );
+                System.out.println(editedProfile);
                /*
                 hashMap.put("id", currentUserId);
                 hashMap.put("username", userValues.get("username") );
@@ -269,6 +275,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task)
                             {
                                 if(task.isSuccessful()) {
+                                    url=imageUri.toString();
                                     Toast.makeText(EditProfileActivity.this, "Image edited ", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
