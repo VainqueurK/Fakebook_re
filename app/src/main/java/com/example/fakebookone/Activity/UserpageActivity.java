@@ -108,9 +108,22 @@ public class UserpageActivity extends AppCompatActivity
                 else if (friends.contains(StaticData.MYPROFILE.getId()))
                     friends.remove(StaticData.MYPROFILE.getId());
 
+                if(!StaticData.MYPROFILE.getFriends().contains(profile.getId()))
+                {
+                    StaticData.MYPROFILE.getFriends().add(profile.getId());
+                    StaticData.MYPROFILE.getMessage_keys().add(profile.getId()+"-"+profile.getId());
+                    connected = true;
+                }
+                else if (StaticData.MYPROFILE.getFriends().contains(profile.getId()))
+                    StaticData.MYPROFILE.getFriends().remove(profile.getId());
+
 
                 Map<String, Object> temp = new HashMap<>();
                 temp.put("friends", friends);
+                Map<String, Object> temp2 = new HashMap<>();
+                temp.put("friends", StaticData.MYPROFILE.getFriends());
+
+                FirebaseDatabase.getInstance().getReference().child("Users").child(StaticData.MYPROFILE.getId()).updateChildren(temp).addOnSuccessListener(s -> {});
 
                 FirebaseDatabase.getInstance().getReference().child("Users").child(profileId).updateChildren(temp).addOnSuccessListener(s -> {
                     Toast.makeText(UserpageActivity.this, connected?"You are now connected to " + profile.getUsername():"You have disconnected from " + profile.getUsername(), Toast.LENGTH_SHORT).show();

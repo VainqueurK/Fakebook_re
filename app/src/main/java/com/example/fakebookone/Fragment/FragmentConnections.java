@@ -75,11 +75,11 @@ public class FragmentConnections extends Fragment {
         super.onStart();
         InitializeFields();
 
-        connAdapter = new ConnectionsAdapter(friends, context);
+      //  connAdapter = new ConnectionsAdapter(friends, context);
         LinearLayoutManager llm = new LinearLayoutManager(context);
         resultList.setLayoutManager(llm);
 
-        resultList.setAdapter((RecyclerView.Adapter) connAdapter);
+      //  resultList.setAdapter((RecyclerView.Adapter) connAdapter);
         if(FirebaseAuth.getInstance().getCurrentUser()!=null&&StaticData.MYPROFILE==null)
         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(
                 new ValueEventListener() {
@@ -154,9 +154,11 @@ public class FragmentConnections extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                  friends.add(dataSnapshot.getValue(Profile.class));
-                    //connAdapter = new ConnectionsAdapter(friends, context);
-                    //resultList.setAdapter((RecyclerView.Adapter) connAdapter);
-                    connAdapter.notifyDataSetChanged();
+
+                 String key=StaticData.MYPROFILE.getMessage_keys().contains(uid+"-"+ StaticData.MYPROFILE.getId())?uid+"-"+ StaticData.MYPROFILE.getId():StaticData.MYPROFILE.getId()+"-"+uid;
+                    connAdapter = new ConnectionsAdapter(friends, context,key);
+                    resultList.setAdapter((RecyclerView.Adapter) connAdapter);
+                    //connAdapter.notifyDataSetChanged();
 
                 }
 

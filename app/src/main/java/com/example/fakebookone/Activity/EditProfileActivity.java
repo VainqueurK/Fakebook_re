@@ -25,6 +25,7 @@ import com.example.fakebookone.Misc.Model.Profile;
 import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -263,27 +264,15 @@ public class EditProfileActivity extends AppCompatActivity {
 
             StorageReference filePath = profileImgReference.child(currentUserId + ".jpg");
 
-            filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    if(task.isSuccessful()) {
-                        Toast.makeText(EditProfileActivity.this,"Your image has been added successfully", Toast.LENGTH_SHORT).show();
-
-                      //  final String downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl().toString();
-                        profileRef.child("imageurl").setValue(imageUri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            filePath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task)
-                            {
-                                if(task.isSuccessful()) {
-                                    url=imageUri.toString();
-                                    Toast.makeText(EditProfileActivity.this, "Image edited ", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    String message = task.getException().getMessage();
-                                    Toast.makeText(EditProfileActivity.this, "Error occured " + message, Toast.LENGTH_SHORT).show();
-                                }
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(EditProfileActivity.this, "Image edited ", Toast.LENGTH_SHORT).show();
 
                             }
+                        }).addOnFailureListener(e->{
+                            Toast.makeText(EditProfileActivity.this, "Error occured " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
                         });
                     }
                 }

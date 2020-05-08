@@ -2,26 +2,19 @@ package com.example.fakebookone.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fakebookone.Activity.MessageUser;
-import com.example.fakebookone.Fragment.FragmentChat;
-import com.example.fakebookone.Misc.ChatSearchResults;
 import com.example.fakebookone.Misc.Model.ChatRoom;
 import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
-
-//import org.ocpsoft.prettytime.PrettyTime;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -60,7 +53,7 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
             }break;
         }
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
-        String ago = prettyTime.format(new Date(list.get(position).getLastMessage().getTimestamp()));
+        String ago = prettyTime.format(new Date(list.get(position).getLastMessage().getTimeSent()));
         holder.latest.setText(ago);
 
 

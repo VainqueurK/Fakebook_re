@@ -15,15 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fakebookone.Activity.MessageUser;
 import com.example.fakebookone.Activity.UserpageActivity;
 import com.example.fakebookone.Misc.Model.ChatRoom;
+import com.example.fakebookone.Misc.Model.Message;
 import com.example.fakebookone.Misc.Model.Profile;
 import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
-
-import org.ocpsoft.prettytime.PrettyTime;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
+import javax.annotation.Nullable;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,9 +36,12 @@ public class ConnectionsAdapter extends RecyclerView.Adapter<ConnectionsAdapter.
 
     ArrayList<Profile> list;
     Context mContext;
-    public ConnectionsAdapter(ArrayList<Profile> list, Context context){
+    String key;
+
+    public ConnectionsAdapter(ArrayList<Profile> list, Context context,String key){
         this.list = list;
         this.mContext = context;
+        this.key=key;
     }
 
     @NonNull
@@ -54,14 +61,40 @@ public class ConnectionsAdapter extends RecyclerView.Adapter<ConnectionsAdapter.
             public void onClick(View v) {
                 //Toast.makeText(v.getContext(), "hello", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(), MessageUser.class);
-                /*intent.putExtra("profile_list", list.get(position));*/
-                v.getContext().startActivity(intent);
+                System.out.println("intent---");
+                FirebaseFirestore.getInstance().collection("Messages").document(key).collection(key).orderBy("timeSent").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        ChatRoom c=new ChatRoom();
+                        c.setKey(key);
+                        c.setUserOne(StaticData.MYPROFILE);
+                        c.setUserTwo(list.get(position));
+                        c.setTimestamp(0);
+
+                        if(queryDocumentSnapshots!=null) {
+                            for (DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()) {
+                                if(ds.exists())
+                                c.getMessages().add(ds.toObject(Message.class));
+                            }
+                            if (c.getMessages().size() > 0) {
+                                c.setTimestamp(c.getMessages().get(0).getTimeSent());
+                                c.setLastMessage(c.getMessages().get(0));
+                            }
+
+                        }
+                        intent.putExtra("chatRoom", c);
+                        v.getContext().startActivity(intent);
+                    }
+                });
+
             }
         });
         holder.profileTile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(v.getContext(), UserpageActivity.class);
+
                 i.putExtra("profileId", list.get(position).getId());
                 v.getContext().startActivity(i);
             }

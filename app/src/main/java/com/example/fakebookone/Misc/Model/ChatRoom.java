@@ -28,6 +28,10 @@ public class ChatRoom implements Serializable {
         this.userTwo = userTwo;
     }
 
+    public ChatRoom() {
+
+    }
+
     public String getKey() {
         return key;
     }

@@ -4,15 +4,18 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
     private String content;
-    private long timestamp;
+    private long timeSent;
     private String sender;
     private int type=0;
 
-    public Message(String content, long timestamp, String sender, int type) {
+    public Message(String content, long timeSent, String sender, int type) {
         this.content = content;
-        this.timestamp = timestamp;
+        this.timeSent = timeSent;
         this.sender = sender;
         this.type = type;
+    }
+    public Message(){
+
     }
 
     public String getContent() {
@@ -23,8 +26,8 @@ public class Message implements Serializable {
         this.content = content;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public long getTimeSent() {
+        return timeSent;
     }
 
     public int getType() {
@@ -35,8 +38,8 @@ public class Message implements Serializable {
         this.type = type;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setTimeSent(long timeSent) {
+        this.timeSent = timeSent;
     }
 
     public String getSender() {
@@ -45,5 +48,15 @@ public class Message implements Serializable {
 
     public void setSender(String sender) {
         this.sender = sender;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "content='" + content + '\'' +
+                ", timeSent=" + timeSent +
+                ", sender='" + sender + '\'' +
+                ", type=" + type +
+                '}';
     }
 }
