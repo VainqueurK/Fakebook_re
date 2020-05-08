@@ -39,7 +39,7 @@ public class MessageUser extends Fragment {
 
     private void InitializeFields() {
         SendMessageButton = (ImageButton) getView().findViewById(R.id.send_message_button);
-        SendImageFileButton = (ImageButton) getView().findViewById(R.id.send_image_file_button);
+        //SendImageFileButton = (ImageButton) getView().findViewById(R.id.send_image_file_button);
         SendUserMessage = (EditText) getView().findViewById(R.id.input_message);
     }
 

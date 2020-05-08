@@ -21,6 +21,8 @@ import com.example.fakebookone.Misc.Model.ChatRoom;
 import com.example.fakebookone.Misc.StaticData;
 import com.example.fakebookone.R;
 
+//import org.ocpsoft.prettytime.PrettyTime;
+
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.ArrayList;
