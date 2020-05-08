@@ -92,7 +92,7 @@ public class EditProfileActivity extends AppCompatActivity {
         tvDob = findViewById(R.id.my_dob_edit);
 
         // Profile Image
-        profileImage = findViewById(R.id.profile_image);
+        profileImage = findViewById(R.id.postImage);
 
         //Edit Text Fields
         editTxtBio = findViewById(R.id.my_bio_edit);
@@ -265,19 +265,21 @@ public class EditProfileActivity extends AppCompatActivity {
             StorageReference filePath = profileImgReference.child(currentUserId + ".jpg");
 
             filePath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(EditProfileActivity.this, "Image edited ", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> downloadUri = taskSnapshot.getStorage().getDownloadUrl();
 
-                            }
-                        }).addOnFailureListener(e->{
-                            Toast.makeText(EditProfileActivity.this, "Error occured " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    if(downloadUri.isSuccessful()) {
+                        url = downloadUri.getResult().toString();
 
-                        });
                     }
                 }
+            }).addOnFailureListener(e -> {
+                Toast.makeText(EditProfileActivity.this, "Error occured " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
             });
         }
+
     }
 
     private void requestStoragePermission() {

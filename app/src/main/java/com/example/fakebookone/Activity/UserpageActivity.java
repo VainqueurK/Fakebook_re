@@ -95,36 +95,44 @@ public class UserpageActivity extends AppCompatActivity
             {
                 ArrayList<String> friends = profile.getFriends();
                 ArrayList<String> keys = profile.getMessage_keys();
+                ArrayList<String> friends2 = StaticData.MYPROFILE.getFriends();
+                ArrayList<String> keys2 =  StaticData.MYPROFILE.getMessage_keys();
 
                 connected = false;
 
                 if(!friends.contains(StaticData.MYPROFILE.getId()) && !profile.getId().equals(StaticData.MYPROFILE.getId()))
                 {
                     friends.add(StaticData.MYPROFILE.getId());
+                    friends2.add(profile.getId());
                     keys.add(StaticData.MYPROFILE.getId()+"-"+profile.getId());
+                    keys2.add(StaticData.MYPROFILE.getId()+"-"+profile.getId());
+
                     connected = true;
                 }
                 else if (friends.contains(StaticData.MYPROFILE.getId()))
-                    friends.remove(StaticData.MYPROFILE.getId());
+                { friends.remove(StaticData.MYPROFILE.getId());
+                friends2.remove(profile.getId());
 
-                if(!StaticData.MYPROFILE.getFriends().contains(profile.getId()))
-                {
-                    StaticData.MYPROFILE.getFriends().add(profile.getId());
-                    StaticData.MYPROFILE.getMessage_keys().add(profile.getId()+"-"+profile.getId());
-                    connected = true;
                 }
-                else if (StaticData.MYPROFILE.getFriends().contains(profile.getId()))
-                    StaticData.MYPROFILE.getFriends().remove(profile.getId());
-
 
                 Map<String, Object> temp = new HashMap<>();
                 temp.put("friends", friends);
                 Map<String, Object> temp2 = new HashMap<>();
-                temp.put("friends", StaticData.MYPROFILE.getFriends());
+                temp.put("friends", friends2);
+                Map<String, Object> temp3 = new HashMap<>();
+                temp.put("message_keys", keys);
+                Map<String, Object> temp4 = new HashMap<>();
+                temp.put("message_keys", keys2);
 
-                FirebaseDatabase.getInstance().getReference().child("Users").child(StaticData.MYPROFILE.getId()).updateChildren(temp).addOnSuccessListener(s -> {});
+                FirebaseDatabase.getInstance().getReference().child("Users").child(StaticData.MYPROFILE.getId()).updateChildren(temp2).addOnSuccessListener(s -> {});
 
                 FirebaseDatabase.getInstance().getReference().child("Users").child(profileId).updateChildren(temp).addOnSuccessListener(s -> {
+                    Toast.makeText(UserpageActivity.this, connected?"You are now connected to " + profile.getUsername():"You have disconnected from " + profile.getUsername(), Toast.LENGTH_SHORT).show();
+                });
+                FirebaseDatabase.getInstance().getReference().child("Users").child(StaticData.MYPROFILE.getId()).updateChildren(temp3).addOnSuccessListener(s -> {
+                    Toast.makeText(UserpageActivity.this, connected?"You are now connected to " + profile.getUsername():"You have disconnected from " + profile.getUsername(), Toast.LENGTH_SHORT).show();
+                });
+                FirebaseDatabase.getInstance().getReference().child("Users").child(profileId).updateChildren(temp4).addOnSuccessListener(s -> {
                     Toast.makeText(UserpageActivity.this, connected?"You are now connected to " + profile.getUsername():"You have disconnected from " + profile.getUsername(), Toast.LENGTH_SHORT).show();
                 });
 
@@ -162,7 +170,7 @@ public class UserpageActivity extends AppCompatActivity
             {
                 if(dataSnapshot.exists())
                 {
-                    Glide.with(imageProfile).load(url).placeholder(R.drawable.profile).into(imageProfile);
+                    Glide.with(getApplicationContext()).load(url).placeholder(R.drawable.profile).into(imageProfile);
                 }
             }
             @Override

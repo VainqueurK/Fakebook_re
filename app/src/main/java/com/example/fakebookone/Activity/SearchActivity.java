@@ -114,6 +114,7 @@ public class SearchActivity extends AppCompatActivity
     private void loadUsers()
     {
 
+        profiles.clear();
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("Users");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
