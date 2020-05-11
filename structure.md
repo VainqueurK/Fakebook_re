@@ -27,10 +27,10 @@ This screen will be blank until you make connections. When you have connections 
 
 ## Profile Screen ### 
 The profile and edit profile screen performed perfectly  [at this point](https://github.com/JamesBrosnan1903/FakebookOne/commit/ac46b06d180fac45a3262f9352da17f566b33667)
-The submitted version crashes due to changes which were made to the overall structure of the app later on which failed. ***Very Important: If this crash does occur and if other features of the app do not work, uninstall the app and then reinstall it and create a new account***
 The correctly working version linked to above, diplays all profile information and the profile picture which for every new account is initially a placeholder image. There is also a logout button which logs the user out. The user can also click on the edit profile button to go to the edit profile screen. ***Just note that the correctly working version of this does not have all the other features mentioned throughout this document.***
 
 ## Edit Profile
+The submitted version crashes when you click 'Save Changes' due to changes which were made to the overall structure of the app later on which failed. ***Very Important: If this crash does occur and if other features of the app do not work, uninstall the app and then reinstall it and create a new account***
 In this screen the user can chnage their profile picture and add/ edit information e.g. eduction , job etc and then save their changes. This only works in the above mentioned verion but not in the final version. To see what it is like you should pull the ocde from the point of that commit and run the app then. ***Just note that the correctly working version of this does not have all the other features mentioned throughout this document.***
 
 ## Message User Screen
