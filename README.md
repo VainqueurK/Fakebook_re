@@ -18,3 +18,8 @@ At some point late in the repository, we decided to attempt to simplify the stru
 The posting feature was not implemented on time, posts were supposed to come up on your home screen that your connections had made.
 
 Otherwise all other aspects of the app that we mentioned in our design document are functioning correctly, there have been some changes in UI, so the current visual look of the app does not correspond with what was initially drafted in our document.
+
+
+### More Information:
+[Design] (https://github.com/JamesBrosnan1903/FakebookOne/blob/master/design.md)
+[Structure] (https://github.com/JamesBrosnan1903/FakebookOne/blob/master/structure.md)
