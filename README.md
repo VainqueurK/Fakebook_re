@@ -22,4 +22,6 @@ Otherwise all other aspects of the app that we mentioned in our design document 
 
 ### More Information:
 [Design](https://github.com/JamesBrosnan1903/FakebookOne/blob/master/design.md)
+
+
 [Structure](https://github.com/JamesBrosnan1903/FakebookOne/blob/master/structure.md)
