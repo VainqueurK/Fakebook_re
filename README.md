@@ -1,5 +1,5 @@
 # FakeBook README 
-## CS4084 Mobile Application development
+## Mobile Application development
 
 Fakebook is a social media application that was written using java and is compatible with android versions 5 and above. The app offers an integrated messaging system where users can communicate with their friends and anybody that they have connected with on the app. The app also has a modern and slick orange colour scheme and allows for a variety of customization options of your personal profile.
 The app uses Firebase in order to store user details along with messages by that user.
